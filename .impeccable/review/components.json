@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 3,
+  "stage": "components",
+  "id": "components",
+  "title": "Plan and asset review · app/page.tsx",
+  "comp": {
+    "path": ".impeccable/mocks/canvas-aurora-approved.png",
+    "width": 1536,
+    "height": 1024
+  },
+  "specSha256": "aa9804753476b31dded603df3011efe24ca259cb84702d5e6a324b959d81ae2a",
+  "components": [
+    {
+      "id": "aurora-canvas",
+      "name": "Aurora canvas",
+      "kind": "chrome",
+      "role": "plan",
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "note": "Black full-viewport WebGL canvas with a procedural cyan, blue, violet, and mint aurora constrained to the perimeter",
+      "medium": "code",
+      "preview": {
+        "kind": "comp-crop"
+      },
+      "flags": [
+        {
+          "id": "painted-pixels",
+          "message": "Looks painted: 88 colours beyond its two main tones and soft shading across 64% of it. Drawn in code, this becomes a flat copy."
+        }
+      ],
+      "codeDrawn": false,
+      "dependencies": []
+    }
+  ],
+  "codeRegions": [
+    {
+      "id": "name",
+      "name": "Name",
+      "kind": "text",
+      "box": {
+        "x": 0.0508,
+        "y": 0.0459,
+        "w": 0.0651,
+        "h": 0.0195
+      },
+      "note": "JOSH KING, uppercase Montserrat"
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "kind": "control",
+      "box": {
+        "x": 0.7695,
+        "y": 0.0449,
+        "w": 0.181,
+        "h": 0.0234
+      },
+      "note": "WORK LAB ABOUT CONTACT, horizontal text navigation"
+    },
+    {
+      "id": "role",
+      "name": "Role",
+      "kind": "text",
+      "box": {
+        "x": 0.0508,
+        "y": 0.873,
+        "w": 0.153,
+        "h": 0.0244
+      },
+      "note": "PRODUCT DESIGNER, uppercase Montserrat"
+    },
+    {
+      "id": "disciplines",
+      "name": "Disciplines",
+      "kind": "text",
+      "box": {
+        "x": 0.0508,
+        "y": 0.9023,
+        "w": 0.1107,
+        "h": 0.0176
+      },
+      "note": "DESIGN · CODE · AI, uppercase DM Sans"
+    },
+    {
+      "id": "latest-work",
+      "name": "Latest work",
+      "kind": "control",
+      "box": {
+        "x": 0.8613,
+        "y": 0.8857,
+        "w": 0.0898,
+        "h": 0.0234
+      },
+      "note": "VIEW LATEST WORK, text link"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title description">
+  <title id="title">Team Management screen placeholder</title>
+  <desc id="description">A temporary typographic field marking where Team Management interface screens will appear.</desc>
+  <rect width="1440" height="900" fill="#eef0ed"/>
+  <circle cx="1108" cy="450" r="326" fill="#54b7de" opacity=".92"/>
+  <circle cx="1108" cy="450" r="215" fill="#eef0ed"/>
+  <circle cx="1108" cy="450" r="104" fill="#e2231a"/>
+  <path d="M0 788 596 226l361 339-310 335H0Z" fill="#101518"/>
+  <text x="202" y="112" fill="#4a555a" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">INTERFACE ARCHIVE PLACEHOLDER</text>
+  <text x="196" y="573" fill="#f7f4ee" font-family="Arial, sans-serif" font-size="100" font-weight="700" letter-spacing="-5">TEAM</text>
+  <text x="196" y="674" fill="#f7f4ee" font-family="Arial, sans-serif" font-size="100" font-weight="700" letter-spacing="-5">MANAGEMENT</text>
+</svg>

@@ -1,0 +1,533 @@
+:root {
+  color-scheme: dark;
+  --radius: 0.1875rem; /* 3px — the small print-like corner (chips, tiles) */
+  /* The site's two corners: controls are pills (rounded-full); plates, cards
+     and tables share this one card radius (rounded-card / .plate). */
+  --radius-plate: 1rem;
+  /* The masthead floats over each page's first band; pages pad by this.
+     1rem top margin + the 3.5rem row. */
+  --masthead-h: 4.5rem;
+
+  /* World primitives */
+  --paper: #0036bc;
+  --chart-surface: #0a5cbe;
+  --ink: #ffffff;
+  --ink-secondary: #d9e4f6;
+  --ink-muted: #aecaf0;
+  --wire-cobalt: #ffffff;
+  --cobalt-deep: #ffffff;
+  --white-dim: #cfe0f8;
+  --up-teal: #3fdfa0;
+  --down-red: #ff9c88;
+  --pending-amber: #ffc94d;
+  --hairline: rgba(255, 255, 255, 0.24);
+  --hairline-strong: rgba(255, 255, 255, 0.44);
+  --gridline: rgba(255, 255, 255, 0.18);
+  --plate-tint: rgba(255, 255, 255, 0.16);
+  --flash-strong: rgba(255, 255, 255, 0.95);
+  --pulse-ring: rgba(255, 255, 255, 0.5);
+  --ink-plate: #15181e;
+  --paper-on-ink: #f5f5f2;
+  --muted-on-ink: #9aa0ab;
+  --gridline-on-ink: #2c2f36;
+  --cobalt-on-ink: #ffffff;
+  /* Midnight: the hero ground of the secondary pages (rebalances, analysts),
+     sampled from the engraved Justice loop's sky. Ink on White: the type of
+     the white passages beneath them — near-black, not cobalt, so figures
+     read as record; cobalt stays for hairlines, links and the live voice. */
+  --midnight: #011629;
+  --ink-on-white: #0b0c0e;
+
+  /* shadcn semantic mapping */
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: var(--chart-surface);
+  --card-foreground: var(--ink);
+  --popover: var(--chart-surface);
+  --popover-foreground: var(--ink);
+  --primary: #ffffff;
+  --primary-foreground: var(--paper);
+  --secondary: #2166bf;
+  --secondary-foreground: var(--ink);
+  --muted: #2166bf;
+  --muted-foreground: var(--ink-secondary);
+  --accent: #2166bf;
+  --accent-foreground: var(--ink);
+  --destructive: var(--down-red);
+  --border: var(--hairline);
+  --input: var(--hairline-strong);
+  --ring: var(--wire-cobalt);
+  --chart-1: #5ea8f2;
+  --chart-2: #ff8a50;
+  --chart-3: #34d9a0;
+  --chart-4: #ffc53d;
+  --chart-5: #ff9ec4;
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 1px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 3px);
+  --radius-xl: calc(var(--radius) + 5px);
+  --radius-card: var(--radius-plate);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-paper: var(--paper);
+  --color-chart-surface: var(--chart-surface);
+  --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-muted: var(--ink-muted);
+  --color-cobalt: var(--wire-cobalt);
+  --color-cobalt-deep: var(--cobalt-deep);
+  --color-up: var(--up-teal);
+  --color-down: var(--down-red);
+  --color-pending: var(--pending-amber);
+  --color-hairline: var(--hairline);
+  --color-gridline: var(--gridline);
+  --color-white-dim: var(--white-dim);
+  --color-ink-plate: var(--ink-plate);
+  --color-paper-on-ink: var(--paper-on-ink);
+  --color-midnight: var(--midnight);
+
+  /* ---------------------------------------------------------------------
+     Story 2's palette (Catalina's branch, from the Story Page v2 handoff).
+     Only tokens this tree does not already define are added; the one that
+     collides — `ink` — is rescoped by `.story-ink` at the end of this file,
+     because this site's ink is white and the story's is a near-black.
+     --------------------------------------------------------------------- */
+  --color-canvas: #0b0c0e;
+  --color-deep: #08090b;
+  --color-lift: #15171c;
+  --color-cream: #f4efe4;
+  --color-silver: #b9bcc4;
+  --color-blue: #0036bc;
+  --color-blue-2: #0b2b90;
+  --color-blue-light: #6e93ff;
+  --color-black: #0b0c0e;
+  --color-mid: #2c3446;
+  --color-body: #14192a;
+  --color-line-cream: #dcd6c8;
+  /* The dashed underline under a fact the page does not have yet. */
+  --color-slot: #c3c8d4;
+  --font-display:
+    var(--font-lausanne), var(--font-dm-sans), -apple-system,
+    BlinkMacSystemFont, sans-serif;
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-sans);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/60;
+  }
+  /* No smooth scrolling: the live feed re-renders cancel scroll animations
+     mid-flight, so anchor jumps are instant by design. */
+  /* Anchor targets land clear of the sticky masthead. */
+  #wire,
+  #basket,
+  #rebalance,
+  #performance {
+    scroll-margin-top: 76px;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-dm-sans), "DM Sans", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Selection inverts the local ground: ink-on-paper text becomes
+     paper-on-ink. The vars resolve per-scope, so this stays legible on the
+     cobalt world, the white invert-plate pages, and the ink-plate passages. */
+  ::selection {
+    background: var(--ink);
+    color: var(--paper);
+  }
+}
+
+@layer components {
+  /* Inverted passage: white ground, near-black ink (--ink-on-white), cobalt
+     kept for hairlines, links and the live voice. Scoping the world tokens
+     flips everything inside — text, hairlines, plates, chips, market pair —
+     to the light-ground palette. Pair with a bg utility (bg-white or
+     bg-paper/…) on the same element. */
+  /* The masthead slot borrows these tokens whenever the page under it opens
+     on an inverted (white) band, so the naked nav reads in that band's ink. */
+  .invert-plate,
+  .masthead-slot:has(+ * > .invert-plate:first-child) {
+    --paper: #ffffff;
+    --chart-surface: #fcfcfb;
+    --ink: var(--ink-on-white);
+    --ink-secondary: rgba(11, 12, 14, 0.78);
+    --ink-muted: rgba(11, 12, 14, 0.6);
+    --wire-cobalt: #0036bc;
+    --cobalt-deep: #0036bc;
+    --white-dim: #33363d;
+    --hairline: rgba(0, 54, 188, 0.25);
+    --hairline-strong: rgba(0, 54, 188, 0.45);
+    --plate-tint: rgba(0, 54, 188, 0.12);
+    --up-teal: #068f62;
+    --down-red: #c93a2e;
+    --pending-amber: #b57f0a;
+    --flash-strong: rgba(0, 54, 188, 0.9);
+    --pulse-ring: rgba(0, 54, 188, 0.45);
+    color: var(--ink);
+  }
+
+  /* Near-black exhibit passage: paper ink on the ink-plate ground. Scoping the
+     world tokens the same way .invert-plate does lets plates, kickers, rules,
+     and signed figures keep their classes inside the performance exhibit.
+     Pair with bg-ink-plate on the same element. */
+  .ink-scope {
+    --paper: var(--ink-plate);
+    --chart-surface: #1b1f26;
+    --ink: var(--paper-on-ink);
+    --ink-secondary: #b9bec7;
+    --ink-muted: var(--muted-on-ink);
+    --wire-cobalt: #ffffff;
+    --cobalt-deep: #ffffff;
+    --white-dim: #dde2f9;
+    --hairline: rgba(245, 245, 242, 0.22);
+    --hairline-strong: rgba(245, 245, 242, 0.4);
+    --gridline: var(--gridline-on-ink);
+    --plate-tint: rgba(245, 245, 242, 0.14);
+    --flash-strong: rgba(255, 255, 255, 0.95);
+    --pulse-ring: rgba(255, 255, 255, 0.5);
+    color: var(--ink);
+  }
+
+  /* Kicker: the dateline voice, set in the site sans. One per module. */
+  .kicker {
+    font-family: var(--font-dm-sans), "DM Sans", Arial, sans-serif;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink-muted);
+    text-transform: uppercase;
+  }
+  .kicker-live {
+    color: var(--wire-cobalt);
+  }
+  /* Title: plate and module headings, sentence case. Headings are never the
+     small tracked kicker (The Heading Rule, DESIGN.md). */
+  .title {
+    font-family: var(--font-dm-sans), "DM Sans", Arial, sans-serif;
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    color: var(--ink);
+  }
+  /* Agate: small data figures — same sans as everything else, tabular digits. */
+  .agate {
+    font-family: var(--font-dm-sans), "DM Sans", Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .plate {
+    background: var(--chart-surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-plate);
+  }
+  .rule {
+    border-top: 1px solid var(--hairline);
+  }
+  .rule-strong {
+    border-top: 1px solid var(--hairline);
+  }
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--wire-cobalt);
+    animation: live-pulse 1.6s ease-out infinite;
+  }
+  .pending-pulse {
+    animation: pending-pulse 1.2s ease-in-out infinite;
+  }
+}
+
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 var(--pulse-ring);
+  }
+  70% {
+    box-shadow: 0 0 0 7px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes pending-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes wire-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tile-flash {
+  0% {
+    outline-color: var(--flash-strong);
+    outline-width: 3px;
+  }
+  100% {
+    outline-color: transparent;
+    outline-width: 1px;
+  }
+}
+
+.wire-arrive {
+  animation: wire-arrive 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* A resolved verdict chip lands with a small settle. */
+@keyframes chip-land {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.chip-land {
+  animation: chip-land 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.tile-flash {
+  outline: 1px solid transparent;
+  animation: tile-flash 2.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* A step of the story's explainer card settles into place. */
+@keyframes step-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-arrive {
+  animation: step-arrive 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wire-arrive,
+  .tile-flash,
+  .live-dot,
+  .pending-pulse,
+  .chip-land,
+  .step-arrive {
+    animation: none;
+  }
+}
+
+/* X embedded posts -------------------------------------------------------- */
+/* widgets.js injects `<div class="twitter-tweet-rendered">` (margin: 10px 0)
+   wrapping the iframe — measured, it was the wrapper carrying the 20px, not
+   the iframe. Both are OUR elements (only the iframe's document is
+   cross-origin), so collapsing them here is what lets the wire butt posts
+   edge to edge and read as one continuous feed. */
+.x-embed .twitter-tweet,
+.x-embed .twitter-tweet-rendered,
+.x-embed iframe {
+  margin: 0 !important;
+}
+
+/* Rendered off-screen until widgets.js reports the post is drawn, then
+   revealed — avoids the blank-then-pop reflow of a late-upgrading embed. */
+.x-embed[data-pending="true"] {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Compact post — X's markup, our chrome. X's <p> ships bare <a> entity links
+   (mentions, hashtags, URLs); style them here so they read as X's without
+   letting them inherit our body colour. */
+.x-compact-text a {
+  color: var(--x-link);
+  text-decoration: none;
+}
+.x-compact-text a:hover {
+  text-decoration: underline;
+}
+
+/* The wire scrolls internally but shows no scrollbar — the masked fade at the
+   bottom is the affordance instead, so the feed reads as continuous tape
+   rather than a boxed list. Scrolling itself is untouched (keyboard, wheel,
+   trackpad and touch all still work). */
+.wire-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.wire-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* X writes paragraph breaks as <br><br>, which at body line-height opens a
+   full blank line between every block and made short posts read as very airy.
+   Collapse the second break to a small gap instead of a whole line. */
+.x-compact-text br + br {
+  content: "";
+  display: block;
+  margin-top: 0.35em;
+}
+
+/* Story typography is intentionally restrained and shared across the six
+   narrative beats. The visual systems keep their own technical labels, while
+   the reading layer uses one display size and one body size so the page reads
+   as a single editorial system rather than six unrelated compositions. */
+[data-story-beat] h2 {
+  font-size: clamp(2rem, 3.5vw, 3.5rem) !important;
+  line-height: 0.98 !important;
+  letter-spacing: -0.03em !important;
+}
+
+[data-story-beat="0"] .story-section1-description,
+[data-story-beat="1"] .story-change-copy-body,
+[data-story-beat="1"] .story-system-card__panel > p,
+[data-story-beat="3"] .story-interpretation-copy > p,
+[data-story-beat="4"] .story-aggregation-copy__panel > p,
+[data-story-beat="5"]
+  .story-result-copy-column
+  .story-aggregation-copy__panel
+  > p,
+[data-story-beat]:not([data-story-beat="0"]):not([data-story-beat="1"]):not(
+    [data-story-beat="3"]
+  ):not([data-story-beat="4"]):not([data-story-beat="5"])
+  p {
+  font-size: clamp(0.95rem, 1vw, 1rem) !important;
+  line-height: 1.55 !important;
+}
+
+[data-story-beat="0"] .story-section1-description__paragraph--secondary {
+  font-size: 1em;
+}
+
+/* Where It Began is the one intentional typographic exception: its opening
+   narrative keeps the larger original body scale so the section reads as a
+   statement before the tighter editorial rhythm begins. */
+[data-story-beat="0"] .story-section1-description {
+  font-size: clamp(1.54rem, 2.5vw, 3.26rem) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.04em !important;
+}
+
+/* The Result keeps the editorial reading structure on larger screens:
+   explanation on the left, instrument on the right. Keep this above the
+   narrow layout threshold so the chart never competes with a compressed copy
+   column. Aggregation intentionally retains its original full-stage treatment. */
+@media (min-width: 1200px) {
+  .story-result-section .story-result-layout {
+    display: grid;
+    grid-template-columns: minmax(22rem, 0.78fr) minmax(0, 1.22fr);
+    align-items: stretch;
+  }
+
+  .story-result-section .story-result-data-column {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 1;
+    min-height: 0;
+    height: 100%;
+  }
+
+  .story-result-section .story-result-copy-column {
+    position: relative;
+    inset: auto;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding-inline-start: 20px;
+  }
+
+  .story-result-section .story-result-chart-wrap {
+    width: min(100%, 42rem);
+  }
+
+  .story-result-section .story-result-chart {
+    width: min(100%, 40rem);
+  }
+}
+
+@media (max-width: 809px) {
+  [data-story-beat] h2 {
+    font-size: clamp(1.9rem, 8vw, 2.8rem) !important;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Story 2's ink, scoped (`/story-2`).
+
+   This site is inverted — `--ink` is `#ffffff` on a cobalt ground — while
+   Story 2 sets dark type on cream and on near-black. They cannot share the
+   token: left to collide, every `text-ink` in the story's two sand sections
+   turned white on cream and vanished. Redefining the custom property on the
+   page wrapper keeps both sides intact for that subtree only.
+
+   Tailwind's `.text-ink` compiles to `color: var(--ink)` here (this tree
+   declares `--color-ink: var(--ink)`), so the underlying variable is the one
+   that does the work; `--color-ink` is set alongside for anything reading it.
+   ------------------------------------------------------------------------- */
+.story-ink {
+  --ink: #0f1426;
+  --color-ink: #0f1426;
+}
+
+/* Figures in columns line up, and carry the story's face. */
+.story-ink .figure,
+.figure {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}

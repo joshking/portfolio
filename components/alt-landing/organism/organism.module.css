@@ -1,0 +1,634 @@
+/* ------------------------------------------------------------------------
+   The Organism — variant-scoped world.
+   Dark abyssal habitat; two bioluminescent accents only:
+   warm amber = fed (bullish), cold cyan = bruised (bearish).
+   ------------------------------------------------------------------------ */
+
+.world {
+  --o-abyss: #080c12;
+  --o-deep: #0c1119;
+  --o-surface: #10161f;
+  --o-line: rgba(196, 212, 228, 0.12);
+  --o-line-strong: rgba(196, 212, 228, 0.26);
+  --o-ink: #e7e9e4;
+  --o-ink-secondary: #a8b0ba;
+  --o-muted: #6d7682;
+  --o-bull: #e3a94e;
+  --o-bull-dim: rgba(227, 169, 78, 0.16);
+  --o-bear: #6cb2ce;
+  --o-bear-dim: rgba(108, 178, 206, 0.16);
+
+  background:
+    radial-gradient(
+      1100px 620px at 62% 30%,
+      rgba(40, 58, 82, 0.35),
+      transparent 70%
+    ),
+    var(--o-abyss);
+  color: var(--o-ink);
+  min-height: 100vh;
+}
+
+.frame {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 3rem 1.25rem 4rem;
+}
+
+/* ------------------------------------------------ masthead --------------- */
+
+.kicker {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--o-muted);
+}
+
+.backlink {
+  color: var(--o-muted);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.backlink:hover,
+.backlink:focus-visible {
+  color: var(--o-ink-secondary);
+  text-decoration: underline;
+}
+
+.title {
+  margin-top: 0.6rem;
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+  max-width: 24ch;
+}
+
+.lede {
+  margin-top: 0.85rem;
+  max-width: 58ch;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--o-ink-secondary);
+}
+
+.vitals {
+  margin-top: 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.07em;
+  color: var(--o-muted);
+}
+
+.vitalBull {
+  color: var(--o-bull);
+}
+
+.vitalBear {
+  color: var(--o-bear);
+}
+
+/* ------------------------------------------------ stage grid ------------- */
+
+.stage {
+  margin-top: 2.2rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .stage {
+    grid-template-columns: minmax(280px, 330px) 1fr;
+    align-items: stretch;
+  }
+}
+
+/* ------------------------------------------------ the habitat ------------ */
+
+.habitat {
+  position: relative;
+  min-height: 480px;
+  height: clamp(480px, 64vh, 660px);
+  border: 1px solid var(--o-line);
+  border-radius: 6px;
+  background:
+    radial-gradient(
+      90% 75% at 50% 42%,
+      rgba(54, 76, 104, 0.22),
+      transparent 72%
+    ),
+    var(--o-deep);
+  overflow: hidden;
+}
+
+.habitatCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.habitatLegend {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--o-muted);
+  pointer-events: none;
+}
+
+.legendBull::before,
+.legendBear::before,
+.legendDissolve::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 0.4rem;
+  vertical-align: 1px;
+}
+
+.legendBull::before {
+  background: var(--o-bull);
+  box-shadow: 0 0 6px rgba(227, 169, 78, 0.8);
+}
+
+.legendBear::before {
+  background: var(--o-bear);
+  box-shadow: 0 0 6px rgba(108, 178, 206, 0.8);
+}
+
+.legendDissolve::before {
+  background: transparent;
+  border: 1px solid var(--o-muted);
+}
+
+.dormant {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  color: var(--o-muted);
+  animation: dormantPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes dormantPulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dormant {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------ hover plate ------------ */
+
+.plate {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  min-width: 200px;
+  max-width: 250px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--o-line-strong);
+  border-radius: 4px;
+  background: rgba(10, 14, 20, 0.92);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.plateHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.plateTicker {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.plateName {
+  margin-top: 0.1rem;
+  font-size: 0.78rem;
+  color: var(--o-ink-secondary);
+  line-height: 1.3;
+}
+
+.plateSector {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--o-muted);
+}
+
+.plateGrid {
+  margin-top: 0.55rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  gap: 0.3rem 0.8rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.68rem;
+}
+
+.plateLabel {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--o-muted);
+}
+
+.plateBackers {
+  margin-top: 0.55rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--o-line);
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  color: var(--o-ink-secondary);
+  overflow-wrap: anywhere;
+}
+
+.up {
+  color: var(--o-bull);
+}
+
+.down {
+  color: var(--o-bear);
+}
+
+/* ------------------------------------------------ signal feed ------------ */
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--o-line);
+  border-radius: 6px;
+  background: var(--o-deep);
+  height: clamp(480px, 64vh, 660px);
+}
+
+.feedHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 0.85rem;
+  border-bottom: 1px solid var(--o-line);
+}
+
+.feedTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--o-ink-secondary);
+}
+
+.pulseDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--o-bull);
+  box-shadow: 0 0 8px rgba(227, 169, 78, 0.9);
+  animation: dotPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulseDot {
+    animation: none;
+  }
+}
+
+.feedNote {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.09em;
+  color: var(--o-muted);
+}
+
+.feedList {
+  list-style: none;
+  margin: 0;
+  padding: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  scrollbar-width: thin;
+}
+
+.card {
+  padding: 0.6rem 0.65rem;
+  border: 1px solid var(--o-line);
+  border-radius: 4px;
+  background: var(--o-surface);
+}
+
+.cardDim {
+  opacity: 0.55;
+}
+
+.cardTop {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.68rem;
+}
+
+.cardHandle {
+  color: var(--o-ink-secondary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cardHandle:hover,
+.cardHandle:focus-visible {
+  color: var(--o-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cardTime {
+  margin-left: auto;
+  color: var(--o-muted);
+}
+
+.cardText {
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: var(--o-ink-secondary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardVerdict {
+  margin-top: 0.45rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.55rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.03em;
+}
+
+.verdictPending {
+  color: var(--o-bull);
+  animation: dotPulse 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .verdictPending {
+    animation: none;
+  }
+}
+
+.verdictCall {
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  border: 1px solid;
+}
+
+.verdictCallBull {
+  color: var(--o-bull);
+  border-color: rgba(227, 169, 78, 0.45);
+  background: var(--o-bull-dim);
+}
+
+.verdictCallBear {
+  color: var(--o-bear);
+  border-color: rgba(108, 178, 206, 0.45);
+  background: var(--o-bear-dim);
+}
+
+.verdictCall:hover,
+.verdictCall:focus-visible {
+  filter: brightness(1.25);
+}
+
+.verdictMeta {
+  color: var(--o-muted);
+}
+
+.verdictNull {
+  color: var(--o-muted);
+}
+
+.verdictDiscarded {
+  color: var(--o-muted);
+  text-decoration: line-through;
+}
+
+.verdictReason {
+  color: var(--o-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.skeleton {
+  height: 74px;
+  border: 1px solid var(--o-line);
+  border-radius: 4px;
+  background: var(--o-surface);
+  animation: dormantPulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------ the record ------------- */
+
+.record {
+  margin-top: 2rem;
+}
+
+.recordHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--o-line-strong);
+  padding-bottom: 0.5rem;
+}
+
+.recordTitle {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--o-ink-secondary);
+}
+
+.recordScroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.recordTable {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.recordTable th {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--o-muted);
+  text-align: left;
+  padding: 0.6rem 0.75rem 0.4rem;
+  border-bottom: 1px solid var(--o-line);
+  white-space: nowrap;
+}
+
+.recordTable th.num,
+.recordTable td.num {
+  text-align: right;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.recordTable td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--o-line);
+  vertical-align: baseline;
+}
+
+.recordRow:hover,
+.recordRow:focus-within {
+  background: rgba(196, 212, 228, 0.05);
+}
+
+.rowLit {
+  background: rgba(227, 169, 78, 0.07);
+}
+
+.rowLit td:first-child {
+  box-shadow: inset 2px 0 0 var(--o-bull);
+}
+
+.recordTicker {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-weight: 700;
+  color: var(--o-ink);
+  text-decoration: none;
+}
+
+.recordTicker:hover,
+.recordTicker:focus-visible {
+  color: var(--o-bull);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.recordName {
+  color: var(--o-muted);
+  font-size: 0.75rem;
+  margin-left: 0.5rem;
+}
+
+.recordSector {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--o-muted);
+  white-space: nowrap;
+}
+
+.weightBar {
+  position: relative;
+  width: 120px;
+  height: 5px;
+  border-radius: 2px;
+  background: rgba(196, 212, 228, 0.1);
+  overflow: hidden;
+}
+
+.weightBarFill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(196, 212, 228, 0.35),
+    rgba(196, 212, 228, 0.6)
+  );
+}
+
+.backers {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.66rem;
+  color: var(--o-ink-secondary);
+  white-space: nowrap;
+}
+
+.recordFoot {
+  margin-top: 0.6rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--o-muted);
+}

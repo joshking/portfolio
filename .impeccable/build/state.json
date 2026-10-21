@@ -1,0 +1,135 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-10-06T21:38:24.419Z",
+  "comp": ".impeccable/mocks/canvas-aurora-approved.png",
+  "direction": "2148c731",
+  "breakpoint": "1536x1024",
+  "artifact": "app/page.tsx",
+  "phase": "hero",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-10-06T21:38:24.419Z",
+      "closedAt": "2026-10-06T22:02:46.957Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "4 comps, 1 approved",
+        "approved": ".impeccable/mocks/canvas-aurora-approved.png",
+        "at": "2026-10-06T22:02:46.956Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-10-06T22:02:46.970Z",
+      "closedAt": "2026-10-06T22:03:10.715Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "6 regions, 0 plates, 3 text regions measured",
+        "at": "2026-10-06T22:03:10.715Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-10-06T22:03:10.715Z",
+      "closedAt": "2026-10-06T22:05:30.553Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "no plates owed",
+        "at": "2026-10-06T22:05:30.546Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "open",
+      "openedAt": "2026-10-06T22:05:30.553Z",
+      "closedAt": null,
+      "attempts": 5,
+      "notes": [
+        {
+          "at": "2026-10-06T22:13:46.108Z",
+          "text": "User explicitly requires a living, breathing animated perimeter. The approved still is a spatial reference; temporal aurora lobes intentionally move between captures while the text regions and black center remain fixed."
+        },
+        {
+          "at": "2026-10-06T22:17:53.126Z",
+          "text": "User decision: living breathing animation should take precedence over static comp matching."
+        }
+      ],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "hero overall 66.2% < 72% (structure 33%, color 94%, detail 71%)"
+        ],
+        "summary": "hero 66% (drift)",
+        "score": 0.6623,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/side-by-side.png",
+        "regionVerdicts": {
+          "aurora-canvas": "drift",
+          "name": "drift",
+          "navigation": "drift",
+          "role": "drift",
+          "disciplines": "drift",
+          "latest-work": "drift"
+        },
+        "at": "2026-10-06T22:18:23.058Z"
+      },
+      "forced": null,
+      "readingsSeen": {
+        "control latest-work: its rule sits 7px into the box in the comp and 1px in the build (-6px), so the strip is shorter than the comp's; match the height, not only the position": 1
+      },
+      "records": 7
+    },
+    "sections": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "motion": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "responsive": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "review": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "sessionId": "01a112e5-5e9a-7562-a0be-0eb3e94cbbc9",
+  "plates": {}
+}

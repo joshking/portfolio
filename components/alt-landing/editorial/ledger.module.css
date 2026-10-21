@@ -1,0 +1,137 @@
+/* The Ledger — Swiss editorial variant.
+   All motion is CSS-only and shares the site's standard ease. */
+
+.root {
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------ weight band ---------- */
+
+/* Width is the momentum animation: verdicts renormalize target weights and
+   every segment glides to its new share of the 100% band. */
+.segment {
+  position: relative;
+  transition:
+    width 700ms var(--ease-standard),
+    background-color 150ms ease-out;
+}
+
+/* Thin cobalt tick over the segment that just moved; sweeps in from the left
+   in step with the row underline below, then unmounts with highlightTicker. */
+.tick {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--wire-cobalt);
+  transform-origin: left;
+  animation: ledger-tick 700ms var(--ease-standard) both;
+}
+
+@keyframes ledger-tick {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ------------------------------------------------ ledger rows ----------- */
+
+.row {
+  position: relative;
+}
+
+.rowHot {
+  background: rgba(41, 70, 232, 0.05);
+  box-shadow: inset 2px 0 0 var(--wire-cobalt);
+}
+
+/* A freshly posted entry settles onto the page like a new ledger line. */
+.arrive {
+  animation: ledger-arrive 420ms var(--ease-standard) both;
+}
+
+@keyframes ledger-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Underline sweep: when a call is accepted, a cobalt rule draws across the
+   row and hands the eye up to the tick on the weight band. */
+.sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--wire-cobalt);
+  transform-origin: left;
+  animation: ledger-sweep 4s var(--ease-standard) both;
+  pointer-events: none;
+}
+
+@keyframes ledger-sweep {
+  0% {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  18% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  80% {
+    transform: scaleX(1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+/* Hover/focus reveal: the annotation line unfolds under the quoted entry. */
+.detailWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 260ms var(--ease-standard),
+    opacity 200ms ease-out;
+}
+
+.row:hover .detailWrap,
+.row:focus-within .detailWrap {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.detailInner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ------------------------------------------------ reduced motion -------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .segment {
+    transition: background-color 150ms ease-out;
+  }
+  .tick,
+  .arrive,
+  .sweep::after {
+    animation: none;
+  }
+  .detailWrap {
+    transition: none;
+  }
+}

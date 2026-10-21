@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Josh King — Homepage Comps</title>
+    <style>
+      :root { color-scheme: dark; font-family: Arial, sans-serif; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; background: #080909; color: #f2f0e9; }
+      body { padding: 72px 24px 24px; }
+      nav {
+        position: fixed; inset: 0 0 auto; z-index: 10;
+        display: flex; align-items: center; justify-content: space-between;
+        height: 56px; padding: 0 24px;
+        background: rgba(8, 9, 9, 0.92); backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(242, 240, 233, 0.12);
+      }
+      nav p { margin: 0; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; }
+      .tabs { display: flex; gap: 8px; }
+      button {
+        appearance: none; border: 1px solid rgba(242, 240, 233, 0.22);
+        border-radius: 999px; background: transparent; color: inherit;
+        padding: 8px 12px; cursor: pointer;
+      }
+      button[aria-selected="true"] { border-color: #a7e0c3; color: #a7e0c3; }
+      main { max-width: 1536px; margin: 0 auto; }
+      figure { display: none; margin: 0; }
+      figure.active { display: block; }
+      img { display: block; width: 100%; height: auto; }
+      figcaption { padding: 14px 2px 0; color: #aaa9a4; font-size: 13px; letter-spacing: 0.04em; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <p>Homepage composition study</p>
+      <div class="tabs" role="tablist" aria-label="Composition options">
+        <button type="button" role="tab" aria-selected="true" data-option="0">Option 1</button>
+        <button type="button" role="tab" aria-selected="false" data-option="1">Option 2</button>
+        <button type="button" role="tab" aria-selected="false" data-option="2">Option 3</button>
+      </div>
+    </nav>
+    <main>
+      <figure class="active"><img src="canvas-reroll-01.png" alt="Option 1, quiet lower register" /><figcaption>01 — Quiet lower register</figcaption></figure>
+      <figure><img src="canvas-reroll-02.png" alt="Option 2, vertical reading order" /><figcaption>02 — Vertical reading order</figcaption></figure>
+      <figure><img src="canvas-reroll-03.png" alt="Option 3, offset type field" /><figcaption>03 — Offset type field</figcaption></figure>
+    </main>
+    <script>
+      const buttons = [...document.querySelectorAll('button')];
+      const figures = [...document.querySelectorAll('figure')];
+      function show(index) {
+        buttons.forEach((button, i) => button.setAttribute('aria-selected', String(i === index)));
+        figures.forEach((figure, i) => figure.classList.toggle('active', i === index));
+      }
+      buttons.forEach((button, index) => button.addEventListener('click', () => show(index)));
+      window.addEventListener('keydown', (event) => {
+        const current = buttons.findIndex((button) => button.getAttribute('aria-selected') === 'true');
+        if (event.key === 'ArrowRight') show((current + 1) % figures.length);
+        if (event.key === 'ArrowLeft') show((current - 1 + figures.length) % figures.length);
+      });
+    </script>
+  </body>
+</html>

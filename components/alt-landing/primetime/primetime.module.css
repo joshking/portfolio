@@ -1,0 +1,569 @@
+/* ------------------------------------------------------------------------
+   "Prime Time" — broadcast studio chrome around the organism basket.
+   Every color routes through a --pt-* var so the theme switch re-skins
+   chrome, canvas, chyron, and cards in one attribute flip.
+   ------------------------------------------------------------------------ */
+
+.studio {
+  /* Midnight — the default dark studio */
+  --pt-bg: #0c0d12;
+  --pt-panel: #14161d;
+  --pt-panel2: #1b1e27;
+  --pt-line: rgba(255, 255, 255, 0.1);
+  --pt-text: #f2f3f7;
+  --pt-body: #c8ccd6;
+  --pt-muted: #8a909c;
+  --pt-red: #e93a31;
+  --pt-gold: #f2a83b;
+  --pt-green: #2fc482;
+  --pt-on-accent: #0c0d12;
+  /* Brand accent: wire cobalt (the site's --wire-cobalt), tuned per theme.
+     Semantic direction colors (green/red) are untouched by this. */
+  --pt-accent: #7d8ff5; /* legible cobalt text/line on the dark studio */
+  --pt-accent-strong: #2946e8; /* fills: wire label, active states */
+  --pt-accent-rgb: 125, 143, 245;
+  --pt-on-brand: #ffffff;
+  --pt-chyron-bg: #101117;
+  /* canvas palette — RGB triplets the canvas reads via getComputedStyle */
+  --pt-cv-bull: 47, 196, 130;
+  --pt-cv-bear: 233, 58, 49;
+  --pt-cv-grey: 170, 184, 198;
+  --pt-cv-body: 150, 170, 192;
+  --pt-cv-label: 242, 243, 247;
+  --pt-cv-accent: 125, 143, 245;
+
+  background: var(--pt-bg);
+  color: var(--pt-text);
+}
+
+/* The Masthead's own `sticky top-0` can't travel past this wrapper, so the
+   shim itself carries the stick — otherwise the wire dock (fixed at 56px)
+   floats over raw content once the header scrolls away. */
+.mastheadShim {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Per directive: no rule under the site masthead on this page. */
+.mastheadShim > header {
+  border-bottom: 0;
+}
+
+/* Daylight is the studio: paper/ink, harmonized with the site. Declared
+   after the base block so its values win. */
+.studio {
+  /* Daylight — paper/ink studio, harmonized with the site's --paper family */
+  --pt-bg: #f5f5f2;
+  --pt-panel: #fdfdfb;
+  --pt-panel2: #e9e8e2;
+  --pt-line: rgba(21, 24, 30, 0.14);
+  --pt-text: #15181e;
+  --pt-body: #3d4149;
+  --pt-muted: #787c84;
+  --pt-red: #c2271d;
+  --pt-gold: #9a6a10;
+  --pt-green: #157a4f;
+  --pt-on-accent: #f5f5f2;
+  /* Daylight runs the site's own cobalt pair on paper. */
+  --pt-accent: #1d33ac;
+  --pt-accent-strong: #2946e8;
+  --pt-accent-rgb: 41, 70, 232;
+  --pt-on-brand: #ffffff;
+  --pt-chyron-bg: #ebeae5;
+  --pt-cv-bull: 21, 122, 79;
+  --pt-cv-bear: 194, 39, 29;
+  --pt-cv-grey: 120, 124, 132;
+  --pt-cv-body: 40, 46, 58;
+  --pt-cv-label: 21, 24, 30;
+  --pt-cv-accent: 41, 70, 232;
+}
+
+/* ------------------------------------------------ studio motion ---------- */
+
+/* Breaking-news lower third: cut in from the wing, overshoot, settle. */
+@keyframes cut-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-36px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.cutIn {
+  animation: cut-in 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Static by design: the masthead's LIVE dot is the page's single pulse —
+   two blinking dots in one viewport is two voices. */
+.liveDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--pt-accent);
+}
+
+.liveDotStandby {
+  background: var(--pt-muted);
+}
+
+@keyframes classify-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.classifyPulse {
+  animation: classify-pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes callout-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.calloutIn {
+  animation: callout-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* The lower third whose ticker matches the hovered bubble: cobalt flare. */
+.related {
+  border-color: var(--pt-accent);
+  box-shadow: inset 0 0 0 1px var(--pt-accent);
+}
+
+/* ------------------------------------------------ theme switch ----------- */
+
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--pt-line);
+  background: var(--pt-panel);
+}
+
+/* Masthead placement: the picker sits on the site's paper chrome, OUTSIDE
+   the .studio var scope — map its vars to the global site tokens. */
+.segmentedOnPaper {
+  --pt-line: var(--hairline);
+  --pt-panel: transparent;
+  --pt-muted: var(--ink-muted);
+  --pt-text: var(--ink);
+  --pt-accent: var(--wire-cobalt);
+  --pt-accent-strong: var(--wire-cobalt);
+  --pt-on-brand: #ffffff;
+}
+
+.segBtn {
+  padding: 0.3rem 0.6rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pt-muted);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.segBtn:hover {
+  color: var(--pt-text);
+}
+
+.segBtn:focus-visible {
+  outline: 2px solid var(--pt-accent);
+  outline-offset: -2px;
+}
+
+.segBtnActive,
+.segBtnActive:hover {
+  background: var(--pt-accent-strong);
+  color: var(--pt-on-brand);
+}
+
+/* ------------------------------------------------ the floor (canvas) ----- */
+
+.floor {
+  position: relative;
+  /* spacing owned by the wrapper in PrimeTimeStudio (theme switch overlays).
+     No border, no panel backing: the bubbles live directly on the studio
+     surface, edge to edge of the column. */
+  height: clamp(520px, 68vh, 800px);
+  overflow: hidden;
+}
+
+.floorCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Loading caption — the ghost bubbles behind it ARE the loading state. */
+.dormant {
+  position: absolute;
+  left: 50%;
+  bottom: 13%;
+  transform: translateX(-50%);
+  max-width: 90%;
+  text-align: center;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--pt-muted);
+  animation: classify-pulse 2.2s ease-in-out infinite;
+}
+
+/* ------------------------------------------------ hover plate ------------ */
+
+.plate {
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* positioned via transform by the canvas loop (bubble-anchored, eased) */
+  min-width: 236px;
+  max-width: 288px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--pt-line);
+  border-radius: 6px;
+  background: var(--pt-panel);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  z-index: 10;
+  animation: plateIn 0.16s ease-out;
+}
+
+@keyframes plateIn {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.plateLogo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.08);
+  flex-shrink: 0;
+}
+
+.plateHeadText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.plateBackers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.4rem;
+  margin-top: 0.55rem;
+  border-top: 1px solid var(--pt-line);
+  padding-top: 0.5rem;
+}
+
+.plateBacker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-family: var(--font-agate), monospace;
+  font-size: 0.68rem;
+  color: var(--pt-body);
+}
+
+/* ---- price row: the quote, honest to the null ---- */
+
+.platePrice {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-top: 0.55rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+}
+
+.platePriceValue {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--pt-text);
+}
+
+.plateChangeFlat {
+  color: var(--pt-muted);
+}
+
+.plateChangeTag {
+  margin-left: 0.3rem;
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  color: var(--pt-muted);
+}
+
+/* ---- latest held USED call for the hovered ticker ---- */
+
+.plateCall {
+  margin-top: 0.55rem;
+  border-top: 1px solid var(--pt-line);
+  padding-top: 0.5rem;
+}
+
+.plateCallHead {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.plateCallBy {
+  font-weight: 500;
+  color: var(--pt-muted);
+}
+
+.plateCallText {
+  margin-top: 0.3rem;
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: var(--pt-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.plateMore {
+  font-family: var(--font-agate), monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--pt-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate {
+    animation: none;
+  }
+}
+
+.plateHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.plateTicker {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--pt-text);
+}
+
+.plateSector {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--pt-muted);
+}
+
+.plateName {
+  margin-top: 0.1rem;
+  font-size: 0.78rem;
+  color: var(--pt-body);
+  line-height: 1.3;
+}
+
+.plateGrid {
+  margin-top: 0.55rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  gap: 0.3rem 0.8rem;
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--pt-text);
+}
+
+.plateLabel {
+  display: block;
+  font-size: 0.58rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pt-muted);
+}
+
+.up {
+  color: var(--pt-green);
+}
+
+.down {
+  color: var(--pt-red);
+}
+
+/* ------------------------------------------------------------------ chyron */
+
+/* Scroll-aware wire dock: hidden while the feed is on screen; once the
+   reader scrolls past the feed it slides in under the sticky masthead
+   (56px). Opacity fades too — the masthead above it is translucent. */
+.wireDock {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  transform: translateY(-110%);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 240ms ease-out,
+    visibility 0s 360ms;
+}
+
+.wireDockOn {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease-out;
+}
+
+.chyronViewport {
+  overflow: hidden;
+}
+
+.chyronTrack {
+  display: flex;
+  width: max-content;
+  animation: chyron-crawl 48s linear infinite;
+}
+
+.chyronViewport:hover .chyronTrack,
+.chyronViewport:focus-within .chyronTrack {
+  animation-play-state: paused;
+}
+
+@keyframes chyron-crawl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ------------------------------------------------ reduced motion --------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .cutIn,
+  .classifyPulse,
+  .calloutIn,
+  .dormant {
+    animation: none;
+  }
+  /* The wire appears without the slide. */
+  .wireDock,
+  .wireDockOn {
+    transition: none;
+  }
+  /* The crawl stops dead; the tape becomes a plain scrollable strip. */
+  .chyronTrack {
+    animation: none;
+  }
+  .chyronViewport {
+    overflow-x: auto;
+  }
+  .chyronCopy {
+    display: none;
+  }
+}
+
+/* The held-posts pill drops in from above the tape, then holds still. */
+.newPostsPill {
+  animation: pillDrop 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+@keyframes pillDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .newPostsPill {
+    animation: none;
+  }
+}
+
+/* Typing caret: blinks while the line types, fades out once it lands. */
+.caret {
+  display: inline-block;
+  width: 0.06em;
+  height: 0.86em;
+  margin-left: 0.06em;
+  vertical-align: -0.06em;
+  background: var(--pt-accent);
+  animation: caretBlink 900ms steps(2, start) infinite;
+}
+
+.caretDone {
+  animation:
+    caretBlink 900ms steps(2, start) 3,
+    caretFade 260ms 2.7s forwards;
+}
+
+@keyframes caretBlink {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes caretFade {
+  to {
+    opacity: 0;
+    width: 0;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret,
+  .caretDone {
+    animation: none;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title description">
+  <title id="title">Live Testing screen placeholder</title>
+  <desc id="description">A temporary typographic field marking where Live Testing interface screens will appear.</desc>
+  <rect width="1440" height="900" fill="#13191d"/>
+  <path d="M0 740C254 566 514 890 784 682c223-172 397-111 656-302v520H0Z" fill="#e2231a" opacity=".84"/>
+  <circle cx="1165" cy="190" r="268" fill="none" stroke="#54b7de" stroke-width="2" opacity=".34"/>
+  <circle cx="1165" cy="190" r="184" fill="none" stroke="#54b7de" stroke-width="2" opacity=".25"/>
+  <text x="208" y="116" fill="#aeb9bf" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">INTERFACE ARCHIVE PLACEHOLDER</text>
+  <text x="202" y="510" fill="#f7f4ee" font-family="Arial, sans-serif" font-size="118" font-weight="700" letter-spacing="-6">LIVE TESTING</text>
+  <text x="210" y="574" fill="#c9d1d4" font-family="Arial, sans-serif" font-size="29">Browser · emulator · simulator · real device</text>
+</svg>

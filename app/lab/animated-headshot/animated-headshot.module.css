@@ -1,0 +1,477 @@
+.page {
+  min-height: 100svh;
+  overflow-x: clip;
+  background: #020503;
+  color: var(--warm-white);
+}
+
+.experiment {
+  width: min(92vw, 1500px);
+  min-height: calc(100svh - 126px);
+  margin: 0 auto;
+  padding: clamp(40px, 5vw, 72px) 0 clamp(56px, 7vw, 96px);
+}
+
+.backLink {
+  display: inline-block;
+  margin-bottom: 32px;
+  color: #7f9b86;
+  font-size: 0.82rem;
+  text-decoration-color: rgb(125 255 162 / 0.34);
+  transition: color 220ms ease-out;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: #9bffb8;
+}
+
+.stage {
+  width: 100%;
+}
+
+.headshotTool {
+  display: grid;
+  grid-template-areas: "controls visual";
+  grid-template-columns: minmax(360px, 0.72fr) minmax(540px, 1.28fr);
+  gap: clamp(56px, 7vw, 112px);
+  align-items: start;
+  width: 100%;
+}
+
+.visualColumn {
+  position: sticky;
+  top: clamp(96px, 12vh, 132px);
+  grid-area: visual;
+  min-width: 0;
+  width: min(100%, calc(100svh - 164px));
+  justify-self: end;
+}
+
+.portraitFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 34px 96px rgb(23 147 64 / 0.09);
+  cursor: crosshair;
+  outline: none;
+  touch-action: pan-y;
+}
+
+.portraitFrame::after {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 42%, transparent 52%, rgb(0 0 0 / 0.34) 100%),
+    linear-gradient(0deg, rgb(0 0 0 / 0.28), transparent 22%);
+  content: "";
+  pointer-events: none;
+}
+
+.portraitFrame:focus-visible {
+  outline: 2px solid #79ff9f;
+  outline-offset: 8px;
+}
+
+.portraitFallback,
+.particleCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portraitFallback {
+  z-index: 2;
+  object-fit: cover;
+  opacity: 0.22;
+  pointer-events: none;
+  filter: grayscale(1) sepia(1) saturate(5.5) hue-rotate(76deg) brightness(0.58) contrast(1.25);
+  transform: translateY(var(--portrait-y, 0%)) scale(var(--portrait-zoom, 1));
+  transition: opacity 500ms ease-out;
+}
+
+.particleCanvas {
+  z-index: 1;
+  display: block;
+  opacity: 0;
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.portraitFrame[data-state="ready"] .particleCanvas {
+  opacity: 1;
+}
+
+.portraitFrame[data-state="ready"] .portraitFallback {
+  opacity: var(--portrait-trace, 0);
+}
+
+.portraitFrame[data-state="fallback"] .portraitFallback {
+  opacity: 0.46;
+}
+
+.loadingLabel {
+  position: absolute;
+  z-index: 4;
+  right: 22px;
+  bottom: 18px;
+  color: #6c8874;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+
+.stageNotes {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 14px;
+  color: #55705d;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.controlPanel {
+  grid-area: controls;
+  min-width: 0;
+  margin: 0;
+  padding: 0 0 clamp(64px, 9vw, 112px);
+}
+
+.controlHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.controlHeader h1 {
+  margin: 0;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(1.7rem, 2.6vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.controlHeader p {
+  margin: 8px 0 0;
+  color: #6f8f78;
+  font-size: 0.76rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.pauseButton,
+.presetRow button,
+.shapeControl button {
+  border: 0;
+  color: #7e9b86;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    color 160ms ease-out,
+    background 160ms ease-out;
+}
+
+.pauseButton {
+  min-width: 78px;
+  padding: 9px 14px;
+  border: 1px solid rgb(126 175 139 / 0.32);
+  background: transparent;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pauseButton:hover,
+.pauseButton:focus-visible,
+.pauseButton[aria-pressed="true"] {
+  border-color: rgb(123 255 161 / 0.6);
+  color: #a9ffbf;
+}
+
+.pauseButton:disabled {
+  border-color: rgb(126 175 139 / 0.14);
+  color: #4f6254;
+  cursor: not-allowed;
+}
+
+.pauseButton:focus-visible,
+.presetRow button:focus-visible,
+.shapeControl button:focus-visible,
+.rangeControl input:focus-visible {
+  outline: 2px solid #79ff9f;
+  outline-offset: 3px;
+}
+
+.presetRow {
+  display: flex;
+  gap: 3px;
+  margin-top: 28px;
+}
+
+.motionNotice {
+  max-width: 62ch;
+  margin: 28px 0 0;
+  color: #86a58e;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.fallbackPanel {
+  padding: 0 0 24px;
+  border-bottom: 1px solid rgb(90 124 98 / 0.22);
+}
+
+.fallbackPanel h1 {
+  margin: 0;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(1.7rem, 2.6vw, 2.45rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+
+.fallbackPanel p {
+  max-width: 62ch;
+  margin: 8px 0 0;
+  color: #86a58e;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.presetRow button {
+  padding: 9px 13px;
+  background: #08110b;
+  font-size: 0.73rem;
+}
+
+.presetRow button:hover,
+.presetRow button[aria-pressed="true"] {
+  background: #102419;
+  color: #b9ffcb;
+}
+
+.controlGroups {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+  margin-top: 44px;
+}
+
+.controlGroups fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.controlGroups legend {
+  width: 100%;
+  margin-bottom: 24px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid rgb(90 124 98 / 0.28);
+  color: #9ed7ad;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.rangeControl {
+  display: block;
+  margin-top: 22px;
+  color: #98aa9d;
+  cursor: pointer;
+}
+
+.rangeControl:first-of-type {
+  margin-top: 0;
+}
+
+.controlLabel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 10px;
+  font-size: 0.78rem;
+}
+
+.controlLabel output {
+  color: #bcdec5;
+  font-size: 0.71rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.rangeControl input {
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  appearance: none;
+  background: transparent;
+  cursor: ew-resize;
+}
+
+.controlDisabled {
+  color: #526257;
+  cursor: not-allowed;
+}
+
+.controlDisabled output {
+  color: #526257;
+}
+
+.controlDisabled input {
+  cursor: not-allowed;
+  opacity: 0.38;
+}
+
+.rangeControl input::-webkit-slider-runnable-track {
+  height: 1px;
+  background: #315039;
+}
+
+.rangeControl input::-webkit-slider-thumb {
+  width: 9px;
+  height: 15px;
+  margin-top: -7px;
+  appearance: none;
+  border: 0;
+  border-radius: 0;
+  background: #8dffa9;
+}
+
+.rangeControl input::-moz-range-track {
+  height: 1px;
+  background: #315039;
+}
+
+.rangeControl input::-moz-range-thumb {
+  width: 9px;
+  height: 15px;
+  border: 0;
+  border-radius: 0;
+  background: #8dffa9;
+}
+
+.shapeControl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+  color: #98aa9d;
+  font-size: 0.78rem;
+}
+
+.shapeControl > div {
+  display: flex;
+  gap: 3px;
+}
+
+.shapeControl button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  background: #08110b;
+}
+
+.shapeControl button:hover,
+.shapeControl button[aria-pressed="true"] {
+  background: #102419;
+  color: #adffc1;
+}
+
+.shapeControl button > span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: currentColor;
+}
+
+.circleShape {
+  border-radius: 50%;
+}
+
+.diamondShape {
+  transform: rotate(45deg) scale(0.8);
+}
+
+.dashShape {
+  height: 3px !important;
+}
+
+@media (max-width: 1080px) {
+  .headshotTool {
+    grid-template-areas:
+      "visual"
+      "controls";
+    grid-template-columns: minmax(0, 1fr);
+    gap: 48px;
+  }
+
+  .visualColumn,
+  .controlPanel {
+    width: min(100%, 760px);
+    justify-self: center;
+  }
+
+  .visualColumn {
+    position: relative;
+    top: auto;
+  }
+
+  .controlPanel {
+    padding-top: 32px;
+    border-top: 1px solid rgb(123 255 161 / 0.2);
+  }
+
+  .controlGroups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .experiment {
+    width: 84%;
+    padding: 64px 0 72px;
+  }
+
+  .backLink {
+    margin-bottom: 36px;
+  }
+
+  .portraitFrame {
+    box-shadow: 0 24px 72px rgb(23 147 64 / 0.08);
+  }
+
+  .stageNotes {
+    padding-top: 12px;
+  }
+
+  .controlPanel {
+    padding-top: 26px;
+  }
+
+  .controlHeader {
+    align-items: center;
+  }
+
+  .controlGroups {
+    grid-template-columns: 1fr;
+    gap: 44px;
+    margin-top: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portraitFallback,
+  .particleCanvas,
+  .pauseButton,
+  .presetRow button,
+  .shapeControl button {
+    transition: none;
+  }
+}

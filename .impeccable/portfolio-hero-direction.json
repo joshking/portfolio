@@ -1,0 +1,49 @@
+{
+  "title": "Choose the portfolio centerpiece system",
+  "question": "These three structures keep the current dark, restrained identity but give Home, Work, and Lab a living centerpiece. Choose the one that should organize the family.",
+  "options": [
+    {
+      "id": "assembly-field",
+      "label": "Assembly Field",
+      "kicker": "THE ROLL",
+      "lineage": "Generative composition and production assembly",
+      "thesis": "Design intent, interface fragments, code, and system signals assemble themselves into one finished product in front of the visitor.",
+      "palette": ["#070A0B", "#F2F0E9", "#9CFFCC", "#6C8CFF"],
+      "materials": ["deep matte canvas", "precise vector light", "live typographic fragments", "dim product-glass planes"],
+      "viewport": "A mostly open black canvas holds scattered but legible fragments of Josh’s real practice; one continuous animated sequence connects and resolves them into a working interface while the name, proposition, and Explore work action remain anchored at the edges.",
+      "risk": "It becomes generic particle theater if the fragments are not recognizably drawn from real product, code, and design work.",
+      "comp": ".impeccable/mocks/decision/assembly-field.webp"
+    },
+    {
+      "id": "timefold",
+      "label": "Timefold",
+      "lineage": "A continuous career plane folded through time",
+      "thesis": "Twenty-five years of design and development bend forward into a current AI-enabled production practice rather than disappearing behind it.",
+      "palette": ["#070A0B", "#F2F0E9", "#9CFFCC", "#3159B8"],
+      "materials": ["black spatial field", "luminous ruled plane", "archival interface impressions", "fine chronological type"],
+      "viewport": "A single wide ribbon begins as older interface and design marks at depth, folds across the viewport, and arrives near the visitor as a crisp contemporary product surface; navigation and proof points attach to moments on the same plane.",
+      "risk": "The chronology can become a résumé visualization unless the current shipped work remains the dominant foreground event.",
+      "comp": ".impeccable/mocks/decision/timefold.webp"
+    },
+    {
+      "id": "convergence-engine",
+      "label": "Convergence Engine",
+      "lineage": "Three distinct practices behaving as one production system",
+      "thesis": "Design judgment, code, and AI remain visibly different forces until their interaction produces a deployable product artifact.",
+      "palette": ["#070A0B", "#F2F0E9", "#9CFFCC", "#7A70FF"],
+      "materials": ["dark optical field", "three motion grammars", "sharp interface captures", "restrained volumetric light"],
+      "viewport": "Three edge-originating systems—one compositional, one structural, one adaptive—cross the canvas and lock into a single legible product frame; Josh’s proposition sits inside the resolved negative space rather than above the spectacle.",
+      "risk": "Design, Code, and AI can read like three branded pillars unless the convergence produces specific portfolio evidence rather than an abstract logo moment.",
+      "comp": ".impeccable/mocks/decision/convergence-engine.webp"
+    }
+  ],
+  "reroll": {
+    "registers": ["safer", "bolder"]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": false,
+  "steer": true
+}

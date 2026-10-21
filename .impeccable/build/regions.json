@@ -1,0 +1,41 @@
+{
+  "regions": [
+    {
+      "id": "aurora-canvas",
+      "kind": "chrome",
+      "container": true,
+      "pixelBox": { "x": 0, "y": 0, "w": 1536, "h": 1024 },
+      "note": "Black full-viewport WebGL canvas with a procedural cyan, blue, violet, and mint aurora constrained to the perimeter"
+    },
+    {
+      "id": "name",
+      "kind": "text",
+      "pixelBox": { "x": 78, "y": 47, "w": 100, "h": 20 },
+      "note": "JOSH KING, uppercase Montserrat"
+    },
+    {
+      "id": "navigation",
+      "kind": "control",
+      "pixelBox": { "x": 1182, "y": 46, "w": 278, "h": 24 },
+      "note": "WORK LAB ABOUT CONTACT, horizontal text navigation"
+    },
+    {
+      "id": "role",
+      "kind": "text",
+      "pixelBox": { "x": 78, "y": 894, "w": 235, "h": 25 },
+      "note": "PRODUCT DESIGNER, uppercase Montserrat"
+    },
+    {
+      "id": "disciplines",
+      "kind": "text",
+      "pixelBox": { "x": 78, "y": 924, "w": 170, "h": 18 },
+      "note": "DESIGN · CODE · AI, uppercase DM Sans"
+    },
+    {
+      "id": "latest-work",
+      "kind": "control",
+      "pixelBox": { "x": 1323, "y": 907, "w": 138, "h": 24 },
+      "note": "VIEW LATEST WORK, text link"
+    }
+  ]
+}

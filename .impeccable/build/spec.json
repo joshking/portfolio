@@ -1,0 +1,477 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-10-06T22:03:00.671Z",
+  "comp": ".impeccable/mocks/canvas-aurora-approved.png",
+  "warnings": [
+    "region aurora-canvas: \"container\": true set in the regions file (the region-size refusal is overridden: one undivided element)"
+  ],
+  "uncoveredInkCells": [],
+  "compSize": {
+    "width": 1536,
+    "height": 1024
+  },
+  "aspect": 1.5,
+  "orientation": "landscape",
+  "palette": [
+    {
+      "hex": "#080809",
+      "coverage": 0.9327
+    },
+    {
+      "hex": "#081037",
+      "coverage": 0.0329
+    },
+    {
+      "hex": "#09185e",
+      "coverage": 0.0172
+    },
+    {
+      "hex": "#08344c",
+      "coverage": 0.0114
+    },
+    {
+      "hex": "#08447c",
+      "coverage": 0.0058
+    }
+  ],
+  "bands": [],
+  "regions": [
+    {
+      "id": "aurora-canvas",
+      "kind": "chrome",
+      "note": "Black full-viewport WebGL canvas with a procedural cyan, blue, violet, and mint aurora constrained to the perimeter",
+      "grid": null,
+      "container": true,
+      "box": {
+        "x": 0,
+        "y": 0,
+        "w": 1,
+        "h": 1
+      },
+      "px": {
+        "x": 0,
+        "y": 0,
+        "w": 1536,
+        "h": 1024
+      },
+      "aspect": 1.5,
+      "palette": [
+        {
+          "hex": "#080809",
+          "coverage": 0.9327
+        },
+        {
+          "hex": "#081037",
+          "coverage": 0.0329
+        },
+        {
+          "hex": "#09185e",
+          "coverage": 0.0172
+        },
+        {
+          "hex": "#08344c",
+          "coverage": 0.0114
+        },
+        {
+          "hex": "#08447c",
+          "coverage": 0.0058
+        }
+      ],
+      "detail": {
+        "energy": 4.3343
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "flags": [
+        {
+          "id": "painted-pixels",
+          "message": "Looks painted: 88 colours beyond its two main tones and soft shading across 64% of it. Drawn in code, this becomes a flat copy."
+        }
+      ]
+    },
+    {
+      "id": "name",
+      "kind": "text",
+      "note": "JOSH KING, uppercase Montserrat",
+      "grid": null,
+      "box": {
+        "x": 0.0508,
+        "y": 0.0459,
+        "w": 0.0651,
+        "h": 0.0195
+      },
+      "px": {
+        "x": 78,
+        "y": 47,
+        "w": 100,
+        "h": 20
+      },
+      "aspect": 5,
+      "palette": [
+        {
+          "hex": "#08080d",
+          "coverage": 0.7902
+        },
+        {
+          "hex": "#3d4448",
+          "coverage": 0.058
+        },
+        {
+          "hex": "#12162c",
+          "coverage": 0.058
+        },
+        {
+          "hex": "#9ea2a5",
+          "coverage": 0.0491
+        },
+        {
+          "hex": "#f2f2f2",
+          "coverage": 0.0446
+        }
+      ],
+      "detail": {
+        "energy": 36.6965
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 9,
+          "capHeightPx": 10.3,
+          "inkIsDark": false,
+          "allCaps": false,
+          "advance": 0.7087,
+          "advTall": 0.7087,
+          "advX": null,
+          "gap": 0.2899,
+          "xRatio": 0.6283,
+          "stemW": 0.2044,
+          "contrast": 0.9759,
+          "serif": null,
+          "densTall": 0.5506,
+          "densX": null,
+          "weight": 0.5506
+        },
+        "widthClass": "normal",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "navigation",
+      "kind": "control",
+      "note": "WORK LAB ABOUT CONTACT, horizontal text navigation",
+      "grid": null,
+      "box": {
+        "x": 0.7695,
+        "y": 0.0449,
+        "w": 0.181,
+        "h": 0.0234
+      },
+      "px": {
+        "x": 1182,
+        "y": 46,
+        "w": 278,
+        "h": 24
+      },
+      "aspect": 11.5833,
+      "palette": [
+        {
+          "hex": "#080a0f",
+          "coverage": 0.8799
+        },
+        {
+          "hex": "#081232",
+          "coverage": 0.0349
+        },
+        {
+          "hex": "#cacccc",
+          "coverage": 0.0307
+        },
+        {
+          "hex": "#102a37",
+          "coverage": 0.0293
+        },
+        {
+          "hex": "#60676d",
+          "coverage": 0.0251
+        }
+      ],
+      "detail": {
+        "energy": 37.3937
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 19,
+          "capHeightPx": 8.8,
+          "inkIsDark": false,
+          "allCaps": true,
+          "advance": 0.7607,
+          "advTall": 0.7607,
+          "advX": null,
+          "gap": 0.2282,
+          "xRatio": null,
+          "stemW": 0.2163,
+          "contrast": 1.0485,
+          "serif": null,
+          "densTall": 0.5506,
+          "densX": null,
+          "weight": 0.5506
+        },
+        "widthClass": "normal",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "role",
+      "kind": "text",
+      "note": "PRODUCT DESIGNER, uppercase Montserrat",
+      "grid": null,
+      "box": {
+        "x": 0.0508,
+        "y": 0.873,
+        "w": 0.153,
+        "h": 0.0244
+      },
+      "px": {
+        "x": 78,
+        "y": 894,
+        "w": 235,
+        "h": 25
+      },
+      "aspect": 9.4,
+      "palette": [
+        {
+          "hex": "#09090a",
+          "coverage": 0.8247
+        },
+        {
+          "hex": "#f2f3f3",
+          "coverage": 0.0618
+        },
+        {
+          "hex": "#797c81",
+          "coverage": 0.0474
+        },
+        {
+          "hex": "#47494c",
+          "coverage": 0.0431
+        },
+        {
+          "hex": "#b6b9bb",
+          "coverage": 0.023
+        }
+      ],
+      "detail": {
+        "energy": 77.5184
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 16,
+          "capHeightPx": 15,
+          "inkIsDark": false,
+          "allCaps": true,
+          "advance": 0.6664,
+          "advTall": 0.6664,
+          "advX": null,
+          "gap": 0.2999,
+          "xRatio": null,
+          "stemW": 0.1611,
+          "contrast": 1.1129,
+          "serif": null,
+          "densTall": 0.4844,
+          "densX": null,
+          "weight": 0.4844
+        },
+        "widthClass": "normal",
+        "weightClass": "medium",
+        "chosen": {
+          "family": "Delius Unicase",
+          "weight": 400,
+          "fontSizePx": 21,
+          "source": "catalog",
+          "estimatedSize": true,
+          "stamp": "704a3214f976"
+        }
+      }
+    },
+    {
+      "id": "disciplines",
+      "kind": "text",
+      "note": "DESIGN · CODE · AI, uppercase DM Sans",
+      "grid": null,
+      "box": {
+        "x": 0.0508,
+        "y": 0.9023,
+        "w": 0.1107,
+        "h": 0.0176
+      },
+      "px": {
+        "x": 78,
+        "y": 924,
+        "w": 170,
+        "h": 18
+      },
+      "aspect": 9.4444,
+      "palette": [
+        {
+          "hex": "#09090c",
+          "coverage": 0.7924
+        },
+        {
+          "hex": "#6a6d71",
+          "coverage": 0.114
+        },
+        {
+          "hex": "#090929",
+          "coverage": 0.0585
+        },
+        {
+          "hex": "#3d434d",
+          "coverage": 0.0263
+        },
+        {
+          "hex": "#283333",
+          "coverage": 0.0088
+        }
+      ],
+      "detail": {
+        "energy": 25.3375
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 15,
+          "capHeightPx": 10.7,
+          "inkIsDark": false,
+          "allCaps": true,
+          "advance": 0.6881,
+          "advTall": 0.6881,
+          "advX": null,
+          "gap": 0.2815,
+          "xRatio": null,
+          "stemW": 0.1881,
+          "contrast": 1.2027,
+          "serif": 0.3146,
+          "densTall": 0.5368,
+          "densX": null,
+          "weight": 0.5368
+        },
+        "widthClass": "normal",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "latest-work",
+      "kind": "control",
+      "note": "VIEW LATEST WORK, text link",
+      "grid": null,
+      "box": {
+        "x": 0.8613,
+        "y": 0.8857,
+        "w": 0.0898,
+        "h": 0.0234
+      },
+      "px": {
+        "x": 1323,
+        "y": 907,
+        "w": 138,
+        "h": 24
+      },
+      "aspect": 5.75,
+      "palette": [
+        {
+          "hex": "#08080c",
+          "coverage": 0.8039
+        },
+        {
+          "hex": "#080829",
+          "coverage": 0.07
+        },
+        {
+          "hex": "#919194",
+          "coverage": 0.0588
+        },
+        {
+          "hex": "#232733",
+          "coverage": 0.042
+        },
+        {
+          "hex": "#5a5c63",
+          "coverage": 0.0252
+        }
+      ],
+      "detail": {
+        "energy": 32.9667
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "surface": {
+        "flat": false,
+        "rules": false
+      },
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 14,
+          "capHeightPx": 9,
+          "inkIsDark": false,
+          "allCaps": true,
+          "advance": 0.6457,
+          "advTall": 0.6457,
+          "advX": null,
+          "gap": 0.2952,
+          "xRatio": null,
+          "stemW": 0.219,
+          "contrast": 1.0408,
+          "serif": null,
+          "densTall": 0.5824,
+          "densX": null,
+          "weight": 0.5824
+        },
+        "widthClass": "normal",
+        "weightClass": "bold"
+      }
+    }
+  ],
+  "compSha256": "d4caab34e3cf78608845133c756d4dd304784293cd6829bae90945ca69b0e9d0",
+  "regionsSource": {
+    "path": ".impeccable/build/regions.json",
+    "sha256": "5527fcd18d9bcf419053184ba4d1e882d860d7fae54ae573c18b680379965f95"
+  }
+}

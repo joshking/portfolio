@@ -1,0 +1,776 @@
+/* The Observatory — radial instrument on a dark blue-black field.
+   Self-scoped dark world: nothing here leaks into the briefing theme. */
+
+.field {
+  --obs-field: #04070d;
+  --obs-glow: #0a1120;
+  --obs-panel: rgba(148, 170, 220, 0.04);
+  --obs-line: rgba(148, 170, 220, 0.14);
+  --obs-line-strong: rgba(148, 170, 220, 0.32);
+  --obs-text: #dbe3f5;
+  --obs-dim: #939fbb;
+  --obs-faint: #5d6983;
+  --obs-accent: #7d8ff5;
+  --obs-accent-bright: #aab7ff;
+  --obs-bull: #e6a44e; /* warm — bullish */
+  --obs-bear: #55b6da; /* cool — bearish */
+  --obs-arc: #8ea3d9;
+  --obs-arc-alt: #5d709f;
+
+  min-height: 100dvh;
+  background:
+    radial-gradient(
+      1100px 700px at 38% 34%,
+      var(--obs-glow) 0%,
+      var(--obs-field) 62%
+    ),
+    var(--obs-field);
+  color: var(--obs-text);
+}
+
+.field ::selection {
+  background: var(--obs-accent);
+  color: #04070d;
+}
+
+.frame {
+  margin: 0 auto;
+  max-width: 1280px;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+.mono {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+/* ------------------------------------------------------------- header --- */
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  border-bottom: 1px solid var(--obs-line);
+  padding-bottom: 1.1rem;
+}
+
+.backLink {
+  composes: mono;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+  text-decoration: none;
+}
+
+.backLink:hover,
+.backLink:focus-visible {
+  color: var(--obs-accent-bright);
+}
+
+.title {
+  margin-top: 0.4rem;
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  color: var(--obs-text);
+}
+
+.subtitle {
+  margin-top: 0.45rem;
+  max-width: 52ch;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--obs-dim);
+}
+
+.headStats {
+  composes: mono;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+  text-align: right;
+}
+
+.liveRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--obs-accent-bright);
+}
+
+.liveDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--obs-accent);
+  box-shadow: 0 0 8px 1px rgba(125, 143, 245, 0.7);
+  animation: liveDot 2.2s ease-in-out infinite;
+}
+
+@keyframes liveDot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+/* -------------------------------------------------------------- stage --- */
+
+.stage {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1.6rem;
+}
+
+@media (min-width: 1024px) {
+  .stage {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 372px);
+    gap: 2.4rem;
+  }
+}
+
+.instrumentCol {
+  min-width: 0;
+}
+
+.instrumentWrap {
+  position: relative;
+  margin: 0 auto;
+  width: min(100%, 620px);
+  aspect-ratio: 1;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------------------------------------------------------- ring parts --- */
+
+.rim {
+  fill: none;
+  stroke: var(--obs-line);
+  stroke-width: 1;
+  stroke-dasharray: 1.2 5.2;
+}
+
+.rimCold {
+  animation: rimPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes rimPulse {
+  0%,
+  100% {
+    stroke: var(--obs-line);
+  }
+  50% {
+    stroke: var(--obs-line-strong);
+  }
+}
+
+.coreRing {
+  fill: none;
+  stroke: var(--obs-line);
+  stroke-width: 1;
+}
+
+.arcGroup {
+  cursor: pointer;
+  outline: none;
+}
+
+.arcHit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 40;
+  stroke-linecap: butt;
+}
+
+.arc {
+  fill: none;
+  stroke-linecap: butt;
+  stroke-width: 13;
+  transition:
+    stroke-dasharray 900ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    stroke-dashoffset 900ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    stroke 260ms ease,
+    stroke-width 260ms ease,
+    transform 700ms cubic-bezier(0.32, 1.35, 0.42, 1);
+}
+
+.arcEven {
+  stroke: var(--obs-arc);
+}
+
+.arcOdd {
+  stroke: var(--obs-arc-alt);
+}
+
+.arcActive,
+.arcGroup:focus-visible .arc {
+  stroke: var(--obs-accent-bright);
+  stroke-width: 18;
+}
+
+/* Momentum: bullish arcs breathe outward warm, bearish contract cool. */
+.arcBull {
+  stroke: var(--obs-bull);
+  stroke-width: 17;
+  transform: scale(1.035);
+}
+
+.arcBear {
+  stroke: var(--obs-bear);
+  stroke-width: 17;
+  transform: scale(0.965);
+}
+
+.sectorBand {
+  fill: none;
+  stroke: var(--obs-line-strong);
+  stroke-width: 1.5;
+  stroke-linecap: butt;
+  transition:
+    stroke-dasharray 900ms cubic-bezier(0.25, 0.8, 0.25, 1),
+    stroke-dashoffset 900ms cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.sectorLabel {
+  composes: mono;
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  fill: var(--obs-faint);
+  pointer-events: none;
+}
+
+.tickerLabel {
+  composes: mono;
+  font-size: 10.5px;
+  fill: var(--obs-dim);
+  pointer-events: none;
+  transition:
+    opacity 260ms ease,
+    fill 260ms ease;
+}
+
+.tickerLabelHidden {
+  opacity: 0;
+}
+
+.tickerLabelActive {
+  fill: var(--obs-accent-bright);
+  opacity: 1;
+}
+
+.tickerLabelBull {
+  fill: var(--obs-bull);
+  opacity: 1;
+}
+
+.tickerLabelBear {
+  fill: var(--obs-bear);
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------ travelers --- */
+
+.traveler {
+  animation: travel 1200ms cubic-bezier(0.3, 0.7, 0.2, 1) forwards;
+}
+
+@keyframes travel {
+  0% {
+    transform: rotate(var(--ang)) translateY(var(--from-y));
+    opacity: 0;
+  }
+  14% {
+    opacity: 1;
+  }
+  72% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(var(--ang)) translateY(var(--to-y));
+    opacity: 0;
+  }
+}
+
+.glyphBull {
+  fill: var(--obs-bull);
+}
+
+.glyphBear {
+  fill: var(--obs-bear);
+}
+
+.glyphHaloBull {
+  fill: none;
+  stroke: var(--obs-bull);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.glyphHaloBear {
+  fill: none;
+  stroke: var(--obs-bear);
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+.glyphNoCall {
+  fill: none;
+  stroke: var(--obs-faint);
+  stroke-width: 1.4;
+}
+
+.glyphDiscard {
+  fill: none;
+  stroke: var(--obs-faint);
+  stroke-width: 1.4;
+}
+
+/* Ripple ring: warm expands outward, cool contracts inward. */
+.ripple {
+  fill: none;
+  stroke-width: 1.5;
+  opacity: 0;
+  animation: none;
+}
+
+.rippleBull {
+  stroke: var(--obs-bull);
+  animation: rippleOut 950ms ease-out 1050ms forwards;
+}
+
+.rippleBear {
+  stroke: var(--obs-bear);
+  animation: rippleIn 950ms ease-out 1050ms forwards;
+}
+
+@keyframes rippleOut {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.24);
+    opacity: 0;
+  }
+}
+
+@keyframes rippleIn {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(0.82);
+    opacity: 0;
+  }
+}
+
+/* ----------------------------------------------------------- core text --- */
+
+.core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  text-align: center;
+  pointer-events: none;
+}
+
+.coreLabel {
+  composes: mono;
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+}
+
+.coreBig {
+  composes: mono;
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--obs-text);
+  line-height: 1.1;
+}
+
+.coreLine {
+  composes: mono;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--obs-dim);
+}
+
+.coreFaint {
+  composes: mono;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+}
+
+.coreCold {
+  composes: mono;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+  animation: rimPulse 2.4s ease-in-out infinite;
+}
+
+.legend {
+  composes: mono;
+  margin: 0.9rem auto 0;
+  max-width: 620px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+}
+
+.legendBull {
+  color: var(--obs-bull);
+}
+
+.legendBear {
+  color: var(--obs-bear);
+}
+
+/* ---------------------------------------------------------- detail plate --- */
+
+.plate {
+  margin: 1.1rem auto 0;
+  max-width: 620px;
+  min-height: 148px;
+  border: 1px solid var(--obs-line);
+  background: var(--obs-panel);
+  padding: 0.9rem 1rem;
+}
+
+.plateHint {
+  composes: mono;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+}
+
+.plateLast {
+  margin-top: 0.7rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--obs-dim);
+}
+
+.plateLast strong {
+  color: var(--obs-text);
+  font-weight: 600;
+}
+
+.plateHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.plateTicker {
+  composes: mono;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--obs-accent-bright);
+}
+
+.plateName {
+  font-size: 0.9rem;
+  color: var(--obs-text);
+}
+
+.plateSector {
+  composes: mono;
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+}
+
+.plateLink {
+  composes: mono;
+  margin-left: auto;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  color: var(--obs-accent);
+  text-decoration: none;
+}
+
+.plateLink:hover,
+.plateLink:focus-visible {
+  color: var(--obs-accent-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.plateMetrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+}
+
+.metricLabel {
+  composes: mono;
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+}
+
+.metricValue {
+  composes: mono;
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  color: var(--obs-text);
+}
+
+.metricUp {
+  color: var(--obs-bull);
+}
+
+.metricDown {
+  color: var(--obs-bear);
+}
+
+.plateCrowd {
+  composes: mono;
+  margin-top: 0.75rem;
+  font-size: 0.6875rem;
+  color: var(--obs-dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.2rem;
+}
+
+.plateCrowd b {
+  font-weight: 500;
+  color: var(--obs-faint);
+}
+
+/* ---------------------------------------------------------------- log --- */
+
+.log {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.logHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--obs-line-strong);
+  padding-bottom: 0.55rem;
+}
+
+.logTitle {
+  composes: mono;
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--obs-accent-bright);
+}
+
+.logCounts {
+  composes: mono;
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+  text-align: right;
+}
+
+.logList {
+  margin-top: 0.4rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--obs-line-strong) transparent;
+  max-height: min(72vh, 700px);
+}
+
+@media (max-width: 1023px) {
+  .logList {
+    max-height: 46vh;
+  }
+}
+
+.logRow {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding: 0.42rem 0.35rem;
+  border-bottom: 1px solid var(--obs-line);
+  transition: background 200ms ease;
+}
+
+.logRowActive {
+  background: rgba(125, 143, 245, 0.09);
+}
+
+.logRowPulse {
+  animation: rowArrive 700ms ease-out;
+}
+
+@keyframes rowArrive {
+  0% {
+    background: rgba(125, 143, 245, 0.22);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+.logTime {
+  composes: mono;
+  font-size: 0.625rem;
+  color: var(--obs-faint);
+}
+
+.logGlyph {
+  composes: mono;
+  width: 1em;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.logGlyphBull {
+  color: var(--obs-bull);
+}
+
+.logGlyphBear {
+  color: var(--obs-bear);
+}
+
+.logGlyphMuted {
+  color: var(--obs-faint);
+}
+
+.logGlyphPending {
+  color: var(--obs-accent);
+  animation: liveDot 1.1s ease-in-out infinite;
+}
+
+.logBody {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.8125rem;
+  color: var(--obs-dim);
+}
+
+.logHandle {
+  composes: mono;
+  font-size: 0.6875rem;
+  color: var(--obs-text);
+  text-decoration: none;
+}
+
+.logHandle:hover,
+.logHandle:focus-visible {
+  color: var(--obs-accent-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.logTag {
+  composes: mono;
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.logTagBull {
+  color: var(--obs-bull);
+}
+
+.logTagBear {
+  color: var(--obs-bear);
+}
+
+.logTagMuted {
+  color: var(--obs-faint);
+}
+
+.logTagPending {
+  color: var(--obs-accent);
+}
+
+.logFoot {
+  composes: mono;
+  padding: 0.6rem 0.35rem;
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--obs-faint);
+  text-align: center;
+}
+
+.logSkeleton {
+  height: 30px;
+  border-bottom: 1px solid var(--obs-line);
+  background: var(--obs-panel);
+  animation: liveDot 1.6s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------- reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .traveler,
+  .ripple {
+    display: none;
+  }
+
+  .arc,
+  .sectorBand,
+  .tickerLabel {
+    transition: none;
+  }
+
+  .arcBull,
+  .arcBear {
+    transform: none;
+  }
+
+  .liveDot,
+  .rimCold,
+  .coreCold,
+  .logRowPulse,
+  .logGlyphPending,
+  .logSkeleton {
+    animation: none;
+  }
+}

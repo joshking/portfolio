@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title description">
+  <title id="title">Billing screen placeholder</title>
+  <desc id="description">A temporary typographic field marking where billing interface screens will appear.</desc>
+  <rect width="1440" height="900" fill="#17242a"/>
+  <path d="M-88 234C212 51 469 47 689 205c248 178 429 76 839-142" fill="none" stroke="#54b7de" stroke-width="172" opacity=".72"/>
+  <path d="M-65 912C274 609 530 725 754 566c232-165 430-160 764 23" fill="none" stroke="#e2231a" stroke-width="210" opacity=".88"/>
+  <text x="206" y="116" fill="#bac5c9" font-family="Arial, sans-serif" font-size="24" letter-spacing="5">INTERFACE ARCHIVE PLACEHOLDER</text>
+  <text x="198" y="520" fill="#f7f4ee" font-family="Arial, sans-serif" font-size="150" font-weight="700" letter-spacing="-8">BILLING</text>
+  <text x="208" y="588" fill="#d1d9db" font-family="Arial, sans-serif" font-size="29">Plans · products · checkout · account</text>
+</svg>

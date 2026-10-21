@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-21T19:59:43Z",
+  "title": "Design System: Josh King Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "canvas-black": {
+        "role": "neutral",
+        "displayName": "Canvas Black",
+        "canonical": "#030404",
+        "tonalRamp": [
+          "oklch(15% 0.003 165)",
+          "oklch(24% 0.003 165)",
+          "oklch(35% 0.003 165)",
+          "oklch(47% 0.003 165)",
+          "oklch(60% 0.003 165)",
+          "oklch(72% 0.003 165)",
+          "oklch(84% 0.003 165)",
+          "oklch(95% 0.003 165)"
+        ]
+      },
+      "warm-white": {
+        "role": "neutral",
+        "displayName": "Warm White",
+        "canonical": "#f2f0e9",
+        "tonalRamp": [
+          "oklch(15% 0.012 95)",
+          "oklch(24% 0.012 95)",
+          "oklch(35% 0.012 95)",
+          "oklch(47% 0.012 95)",
+          "oklch(60% 0.012 95)",
+          "oklch(72% 0.012 95)",
+          "oklch(84% 0.012 95)",
+          "oklch(95% 0.012 95)"
+        ]
+      },
+      "quiet-gray": {
+        "role": "neutral",
+        "displayName": "Quiet Gray",
+        "canonical": "#8f918e",
+        "tonalRamp": [
+          "oklch(15% 0.006 145)",
+          "oklch(24% 0.006 145)",
+          "oklch(35% 0.006 145)",
+          "oklch(47% 0.006 145)",
+          "oklch(60% 0.006 145)",
+          "oklch(72% 0.006 145)",
+          "oklch(84% 0.006 145)",
+          "oklch(95% 0.006 145)"
+        ]
+      },
+      "signal-mint": {
+        "role": "primary",
+        "displayName": "Signal Mint",
+        "canonical": "#a7e0c3",
+        "tonalRamp": [
+          "oklch(15% 0.08 155)",
+          "oklch(24% 0.08 155)",
+          "oklch(35% 0.08 155)",
+          "oklch(47% 0.08 155)",
+          "oklch(60% 0.08 155)",
+          "oklch(72% 0.08 155)",
+          "oklch(84% 0.08 155)",
+          "oklch(95% 0.08 155)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Short hero and case-study statements."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section openings and major editorial transitions."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Project names and compact feature headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Narrative, explanatory, and interaction copy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Navigation, metadata, and compact field labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "artifact-lift",
+        "value": "0 28px 72px rgb(3 4 4 / 0.24)",
+        "purpose": "Supports screenshots and project artifacts on light presentation fields."
+      },
+      {
+        "name": "panel-lift",
+        "value": "24px 32px 72px rgb(0 0 0 / 0.42)",
+        "purpose": "Reserved for a high-priority light panel that overlaps the dark canvas."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Short entrance, underline, and spatial transitions that settle without bounce."
+      },
+      {
+        "name": "route-peer",
+        "value": "140ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Low-amplitude transition between top-level routes."
+      },
+      {
+        "name": "interaction",
+        "value": "220ms ease-out",
+        "purpose": "Default color and directional response for interactive controls."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "stack",
+        "value": "960px"
+      },
+      {
+        "name": "mobile-navigation",
+        "value": "700px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Square, high-contrast action used when a task needs a clear completion point.",
+      "html": "<button class=\"ds-btn-primary\">Send message <svg aria-hidden=\"true\" viewBox=\"0 0 18 18\"><path d=\"M3 9h12M10 4l5 5-5 5\" /></svg></button>",
+      "css": ".ds-btn-primary { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 14px; padding: 13px 20px; border: 0; border-radius: 0; background: var(--black, #030404); color: var(--warm-white, #f2f0e9); cursor: pointer; font-family: var(--font-dm-sans), sans-serif; font-size: 0.87rem; font-weight: 650; transition: background-color 220ms ease-out, color 220ms ease-out, transform 220ms ease-out; } .ds-btn-primary svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.5; } .ds-btn-primary:hover { background: #235f48; transform: translateX(3px); } .ds-btn-primary:focus-visible { outline: 2px solid #29664e; outline-offset: 5px; }"
+    },
+    {
+      "name": "Line Field",
+      "kind": "input",
+      "refersTo": "field-line",
+      "description": "Unboxed text field with a tracked label and bottom-rule focus treatment.",
+      "html": "<label class=\"ds-field\"><span>Name</span><input type=\"text\" placeholder=\"Your name\" /></label>",
+      "css": ".ds-field { display: grid; gap: 9px; color: var(--black, #030404); font-family: var(--font-dm-sans), sans-serif; } .ds-field span { font-size: 0.72rem; font-weight: 650; letter-spacing: 0.12em; text-transform: uppercase; } .ds-field input { width: 100%; padding: 8px 0 13px; border: 0; border-bottom: 1px solid #9b9e99; border-radius: 0; outline: 0; background: transparent; color: var(--black, #030404); caret-color: #33755a; font: inherit; line-height: 1.5; transition: border-color 180ms ease-out, box-shadow 180ms ease-out; } .ds-field input::placeholder { color: #6c706c; opacity: 1; } .ds-field input:focus-visible { border-bottom-color: #29664e; box-shadow: 0 2px 0 #29664e; }"
+    },
+    {
+      "name": "Site Navigation",
+      "kind": "nav",
+      "refersTo": "navigation-link",
+      "description": "Compact tracked destinations with mint active and hover states.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Primary navigation\"><a href=\"#\">Work</a><a href=\"#\">Lab</a><a href=\"#\">Resume</a><a class=\"ds-nav-active\" href=\"#\">Contact</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: clamp(18px, 1.95vw, 30px); color: var(--warm-white, #f2f0e9); font-family: var(--font-dm-sans), sans-serif; font-size: 12px; font-weight: 400; letter-spacing: 0.16em; line-height: 1; text-transform: uppercase; } .ds-nav a { color: inherit; text-decoration: none; transition: color 240ms ease-out; } .ds-nav a:hover, .ds-nav .ds-nav-active { color: var(--mint, #a7e0c3); } .ds-nav a:focus-visible { border-radius: 2px; outline: 2px solid var(--mint, #a7e0c3); outline-offset: 7px; }"
+    },
+    {
+      "name": "Direct Link",
+      "kind": "custom",
+      "description": "Visible text link for contact routes and in-copy actions.",
+      "html": "<a class=\"ds-direct-link\" href=\"#\">me@joshking.me</a>",
+      "css": ".ds-direct-link { color: var(--warm-white, #f2f0e9); font-family: var(--font-dm-sans), sans-serif; text-decoration-color: rgb(167 224 195 / 0.5); text-decoration-thickness: 1px; text-underline-offset: 0.35em; transition: color 240ms ease-out; } .ds-direct-link:hover { color: var(--mint, #a7e0c3); } .ds-direct-link:focus-visible { border-radius: 2px; outline: 2px solid var(--mint, #a7e0c3); outline-offset: 7px; }"
+    },
+    {
+      "name": "Project Row",
+      "kind": "card",
+      "refersTo": "project-row",
+      "description": "Flat editorial project entry divided by hairlines instead of a filled card.",
+      "html": "<a class=\"ds-project-row\" href=\"#\"><strong>Reserve</strong><span>Financial product systems carried from design into production</span><small>Design + code + AI</small></a>",
+      "css": ".ds-project-row { display: grid; grid-template-columns: minmax(150px, 0.65fr) minmax(240px, 1.25fr) minmax(130px, 0.4fr); gap: clamp(24px, 6vw, 96px); align-items: baseline; padding: 32px 0; border-top: 1px solid rgb(242 240 233 / 0.22); border-bottom: 1px solid rgb(242 240 233 / 0.22); color: var(--warm-white, #f2f0e9); font-family: var(--font-dm-sans), sans-serif; text-decoration: none; transition: color 300ms cubic-bezier(0.16, 1, 0.3, 1), transform 420ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-project-row strong { font-family: var(--font-montserrat), sans-serif; font-size: clamp(1.6rem, 2.5vw, 2.8rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1.05; } .ds-project-row span { color: var(--muted, #8f918e); line-height: 1.55; } .ds-project-row small { justify-self: end; font-size: 0.95rem; } .ds-project-row:hover, .ds-project-row:focus-visible { color: var(--mint, #a7e0c3); transform: translateX(12px); } .ds-project-row:focus-visible { outline: 2px solid var(--mint, #a7e0c3); outline-offset: 7px; } @media (max-width: 700px) { .ds-project-row { grid-template-columns: 1fr; gap: 12px; } .ds-project-row small { justify-self: start; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Quiet Canvas",
+    "overview": "The portfolio is a restrained, near-black field in which proportion, typography, whitespace, and authentic work create the visual identity. The system should feel senior, calm, and intentional: expressive through scale and composition, never through a decorative theme or a client brand borrowed from the work.\n\nMontserrat gives display language a precise architectural presence while DM Sans keeps reading and interaction copy clear. Warm-white type, subdued gray support copy, rare mint signals, hairline boundaries, and responsive editorial grids create continuity across landing, index, case-study, résumé, lab, and contact surfaces. Motion is quiet and brief, rewarding attention without becoming the subject.",
+    "keyCharacteristics": [
+      "Near-black canvas with warm, low-glare contrast.",
+      "Large Montserrat statements paired with highly readable DM Sans copy.",
+      "Hairlines, spacing, and alignment establish groups before containers do.",
+      "Mint is a scarce interaction signal, not a decorative wash.",
+      "Real artifacts lead inside project contexts; the portfolio shell stays visually neutral.",
+      "Responsive layouts preserve reading order and grouping instead of merely shrinking."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Mint marks interaction or emphasis; it does not become a large background, ornamental gradient, or client-themed palette.",
+        "section": "colors"
+      },
+      {
+        "name": "The Client Boundary Rule",
+        "body": "Project colors remain inside their own artifacts and case-study contexts and never redefine the portfolio shell.",
+        "section": "colors"
+      },
+      {
+        "name": "The Scale Before Ornament Rule",
+        "body": "Create hierarchy with type size, weight, line length, and placement before adding a new color, container, or effect.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Case Rule",
+        "body": "Sentence case carries headings and actions; uppercase belongs to the wordmark, compact labels, and established acronyms rather than eyebrow headings.",
+        "section": "typography"
+      },
+      {
+        "name": "The Whitespace With Work Rule",
+        "body": "Empty space must clarify hierarchy, create atmosphere, or protect an artifact. If it weakens the relationship between neighboring content, reduce it.",
+        "section": "layout"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Use alignment, tonal fields, and hairlines for structure; add a shadow only when an object truly sits above another plane.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No Soft Card Rule",
+        "body": "Do not introduce generic rounded cards, pills, or floating glass surfaces into the portfolio shell. A curved shape must be functionally or artifactually justified.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do let scale, rhythm, contrast, and authentic work produce the memorable moment.",
+      "Do maintain a stable reading direction for repeated projects and subprojects.",
+      "Do use hairlines and deliberate spacing to make every content group visibly begin and end.",
+      "Do keep keyboard focus visible and provide reduced-motion behavior for every nonessential transition.",
+      "Do preserve generous but purposeful mobile margins and keep controls visible by default."
+    ],
+    "donts": [
+      "Don't use client imagery, palettes, or motifs as Josh King's site-wide brand identity.",
+      "Don't add eyebrow headings, gratuitous side borders, rounded-card grids, or decorative glass effects.",
+      "Don't fill empty space with arbitrary effects, illustrations, or prose; every addition must improve hierarchy, proof, or action.",
+      "Don't alternate repeated layouts without a meaningful content reason.",
+      "Don't make motion, gradients, or Three.js effects the product before they have a clear purpose and accessible fallback."
+    ]
+  }
+}

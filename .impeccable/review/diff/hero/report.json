@@ -1,0 +1,328 @@
+{
+  "tool": "comp-diff",
+  "version": 1,
+  "createdAt": "2026-10-06T22:18:22.936Z",
+  "label": "hero",
+  "comp": ".impeccable/mocks/canvas-aurora-approved.png",
+  "build": ".impeccable/review/hero-repro.png",
+  "spec": ".impeccable/build/spec.json",
+  "compSize": "1536x1024",
+  "buildSize": "1536x1024",
+  "align": "top",
+  "overall": 0.6623,
+  "verdict": "drift",
+  "scores": {
+    "overall": 0.6623,
+    "structure": 0.3313,
+    "color": 0.9394,
+    "colorIntersection": 0.9105,
+    "paletteMatch": 0.955,
+    "detail": 0.7061,
+    "detailRaw": 0.7738,
+    "detailAdded": 0.1354,
+    "bands": 0.9
+  },
+  "palette": {
+    "comp": [
+      {
+        "hex": "#080809",
+        "coverage": 0.9279
+      },
+      {
+        "hex": "#081037",
+        "coverage": 0.0328
+      },
+      {
+        "hex": "#09185e",
+        "coverage": 0.0171
+      },
+      {
+        "hex": "#08344c",
+        "coverage": 0.0113
+      },
+      {
+        "hex": "#08447c",
+        "coverage": 0.0057
+      },
+      {
+        "hex": "#0d2288",
+        "coverage": 0.0052
+      }
+    ],
+    "build": [
+      {
+        "hex": "#080809",
+        "coverage": 0.9578
+      },
+      {
+        "hex": "#131739",
+        "coverage": 0.0165
+      },
+      {
+        "hex": "#082d35",
+        "coverage": 0.0131
+      },
+      {
+        "hex": "#1a90ce",
+        "coverage": 0.005
+      },
+      {
+        "hex": "#135255",
+        "coverage": 0.0039
+      },
+      {
+        "hex": "#186fd5",
+        "coverage": 0.0038
+      }
+    ]
+  },
+  "regions": [
+    {
+      "id": "aurora-canvas",
+      "x": 0,
+      "y": 0,
+      "w": 1,
+      "h": 1,
+      "kind": "chrome",
+      "score": {
+        "overall": 0.6623,
+        "structure": 0.3313,
+        "color": 0.9394,
+        "colorIntersection": 0.9105,
+        "paletteMatch": 0.955,
+        "detail": 0.7061,
+        "detailRaw": 0.7738,
+        "detailAdded": 0.1354,
+        "bands": 0.9
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        },
+        "build": {
+          "x": 0,
+          "y": 0,
+          "w": 1536,
+          "h": 1024
+        }
+      },
+      "blocking": null,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "name",
+      "x": 0.0508,
+      "y": 0.0459,
+      "w": 0.0651,
+      "h": 0.0195,
+      "kind": "text",
+      "score": {
+        "overall": 0.5261,
+        "structure": 0.3346,
+        "color": 0.7457,
+        "colorIntersection": 0.554,
+        "paletteMatch": 0.8489,
+        "detail": 0.5325,
+        "detailRaw": 0.6523,
+        "detailAdded": 0.2396,
+        "bands": 0.925
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 3,
+          "w": 90,
+          "h": 10
+        },
+        "build": {
+          "x": 0,
+          "y": 2,
+          "w": 96,
+          "h": 11
+        }
+      },
+      "blocking": null,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "navigation",
+      "x": 0.7695,
+      "y": 0.0449,
+      "w": 0.181,
+      "h": 0.0234,
+      "kind": "control",
+      "score": {
+        "overall": 0.6853,
+        "structure": 0.6495,
+        "color": 0.7883,
+        "colorIntersection": 0.6571,
+        "paletteMatch": 0.8589,
+        "detail": 0.5859,
+        "detailRaw": 0.6536,
+        "detailAdded": 0.1354,
+        "bands": 0.3333
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 9,
+          "y": 9,
+          "w": 262,
+          "h": 9
+        },
+        "build": {
+          "x": 0,
+          "y": 7,
+          "w": 276,
+          "h": 9
+        }
+      },
+      "blocking": null,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "role",
+      "x": 0.0508,
+      "y": 0.873,
+      "w": 0.153,
+      "h": 0.0244,
+      "kind": "text",
+      "score": {
+        "overall": 0.6135,
+        "structure": 0.4026,
+        "color": 0.8702,
+        "colorIntersection": 0.7503,
+        "paletteMatch": 0.9348,
+        "detail": 0.7901,
+        "detailRaw": 0.8317,
+        "detailAdded": 0.0833,
+        "bands": 0.7619
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 2,
+          "y": 4,
+          "w": 230,
+          "h": 15
+        },
+        "build": {
+          "x": 2,
+          "y": 4,
+          "w": 233,
+          "h": 15
+        }
+      },
+      "blocking": null,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "disciplines",
+      "x": 0.0508,
+      "y": 0.9023,
+      "w": 0.1107,
+      "h": 0.0176,
+      "kind": "text",
+      "score": {
+        "overall": 0.5543,
+        "structure": 0.4394,
+        "color": 0.7943,
+        "colorIntersection": 0.6902,
+        "paletteMatch": 0.8504,
+        "detail": 0.5733,
+        "detailRaw": 0.6983,
+        "detailAdded": 0.25,
+        "bands": 0.5
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 1,
+          "y": 3,
+          "w": 155,
+          "h": 10
+        },
+        "build": {
+          "x": 1,
+          "y": 2,
+          "w": 168,
+          "h": 11
+        }
+      },
+      "blocking": null,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    },
+    {
+      "id": "latest-work",
+      "x": 0.8613,
+      "y": 0.8857,
+      "w": 0.0898,
+      "h": 0.0234,
+      "kind": "control",
+      "score": {
+        "overall": 0.6752,
+        "structure": 0.5743,
+        "color": 0.7861,
+        "colorIntersection": 0.6715,
+        "paletteMatch": 0.8478,
+        "detail": 0.7083,
+        "detailRaw": 0.776,
+        "detailAdded": 0.1354,
+        "bands": 0.6667
+      },
+      "verdict": "drift",
+      "inkBox": {
+        "comp": {
+          "x": 3,
+          "y": 7,
+          "w": 127,
+          "h": 9
+        },
+        "build": {
+          "x": 4,
+          "y": 7,
+          "w": 132,
+          "h": 9
+        }
+      },
+      "blocking": null,
+      "blockingReasons": [],
+      "rawVerdict": "drift"
+    }
+  ],
+  "files": {
+    "sideBySide": "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/side-by-side.png",
+    "heatmap": "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/heatmap.png",
+    "regionFiles": [
+      "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/regions/aurora-canvas.png",
+      "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/regions/name.png",
+      "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/regions/navigation.png",
+      "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/regions/role.png",
+      "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/regions/disciplines.png",
+      "/Users/deepthought/Documents/repos/portfolio/.impeccable/review/diff/hero/regions/latest-work.png"
+    ]
+  },
+  "interpretation": "hero-gate",
+  "measurementsAvailable": true,
+  "gate": {
+    "ok": false,
+    "reasons": [
+      "hero overall 66.2% < 72% (structure 33%, color 94%, detail 71%)"
+    ],
+    "advisories": [],
+    "unscopedReasons": [
+      "hero overall 66.2% < 72% (structure 33%, color 94%, detail 71%)"
+    ]
+  },
+  "rawReport": ".impeccable/review/diff/hero/raw-report.json"
+}

@@ -1,0 +1,27 @@
+/* /alt-landing keeps the mono agate voice for its kickers and data figures.
+   The public site's globals moved .agate/.kicker to Franklin (Cobalt edition);
+   this re-scopes the original mono treatment to the studio routes only. */
+.alt-landing .agate {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-weight: 500;
+}
+.alt-landing .kicker {
+  font-family: var(--font-agate), ui-monospace, monospace;
+  font-weight: 500;
+}
+/* The studio masthead carries extra chrome (theme/source switches); keep the
+   site nav on one line instead of wrapping into the brand. */
+.alt-landing header nav {
+  gap: 0.875rem;
+}
+.alt-landing header nav a,
+.alt-landing header .kicker {
+  white-space: nowrap;
+}
+/* Brand stays whole; the "A RESERVE DTF" subtitle yields to the studio chrome. */
+.alt-landing header a[href="/"] {
+  flex-shrink: 0;
+}
+.alt-landing header a[href="/"] > .kicker {
+  display: none;
+}
