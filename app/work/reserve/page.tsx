@@ -45,43 +45,42 @@ function ProjectArrow() {
 
 export default function ReserveLandingPage() {
   return (
-    <CaseStudyShell backHref="/work" backLabel="Back to work">
+    <CaseStudyShell backHref="/work" backLabel="Back to work" overlayHeader>
       <header className="reserve-index-hero">
-        <div className="reserve-index-brand">
-          <Image
-            alt=""
-            aria-hidden="true"
-            height={336}
-            src="/case-studies/reserve/brand/reserve-logo.png"
-            width={312}
-          />
-          <h1>Reserve</h1>
-        </div>
-        <div className="reserve-index-introduction">
-          <p>Designing investment tools—and then helping build them.</p>
-          <p>
-            My work at Reserve moved through three connected projects. Together they show the breadth of my product
-            design practice and the way I now use a development background and AI-assisted workflows to carry ideas
-            into production.
-          </p>
-        </div>
-        <div className="reserve-index-art" aria-hidden="true">
+        <div className="reserve-index-backdrop" aria-hidden="true">
           <Image
             alt=""
             fill
-            priority
-            sizes="(max-width: 760px) 92vw, 88vw"
+            preload
+            sizes="100vw"
             src="/case-studies/reserve/brand/reserve-line-art.jpg"
           />
         </div>
+
+        <div className="reserve-index-content">
+          <div className="reserve-index-brand">
+            <Image
+              alt=""
+              aria-hidden="true"
+              height={336}
+              src="/case-studies/reserve/brand/reserve-logo.png"
+              width={312}
+            />
+            <h1>Reserve</h1>
+          </div>
+
+          <div className="reserve-index-introduction">
+            <p>Designing investment tools—and then helping build them.</p>
+            <p>
+              My work at Reserve moved through three connected projects. Together they show the breadth of my product
+              design practice and the way I now use a development background and AI-assisted workflows to carry ideas
+              into production.
+            </p>
+          </div>
+        </div>
       </header>
 
-      <section className="reserve-project-index" aria-labelledby="reserve-projects-title">
-        <header>
-          <h2 id="reserve-projects-title">The work, separated by project.</h2>
-          <p>Each case study stays focused on its own problem, artifacts, and mode of making.</p>
-        </header>
-
+      <section className="reserve-project-index" aria-label="Reserve projects">
         <div className="reserve-project-list">
           {projects.map((project) => (
             <Link className="reserve-project-card" href={project.href} key={project.name}>

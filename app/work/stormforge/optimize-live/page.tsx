@@ -141,7 +141,7 @@ const trialScreens = [
 export default function OptimizeLiveStudy() {
   return (
     <CaseStudyShell backHref="/work/stormforge" backLabel="Back to StormForge">
-      <header className="case-study-hero stormforge-case-hero">
+      <header className="case-study-hero stormforge-case-hero optimize-live-hero">
         <CaseStudyTitle>Optimize Live</CaseStudyTitle>
         <div className="case-study-summary">
           <p>
@@ -166,7 +166,7 @@ export default function OptimizeLiveStudy() {
         </div>
       </header>
 
-      <aside className="case-highlight stormforge-case-highlight">
+      <aside className="case-highlight stormforge-case-highlight optimize-live-highlight">
         <h2>Outcome</h2>
         <p>
           The work helped move StormForge from a struggling flagship product to Optimize Live: an observation-based,

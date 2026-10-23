@@ -22,21 +22,20 @@ type SauceProject = {
 
 const projects: readonly SauceProject[] = [
   {
-    name: "Live Testing",
+    name: "Software Testing",
     description:
-      "Redesigning the core remote-testing experience across emulators, simulators, and real devices—the center of the Sauce Labs product suite.",
-    image: "/case-studies/saucelabs/live-testing-session-portrait.png",
-    alt: "Sauce Labs live testing session with a remote mobile device",
+      "Redesigning web and mobile app testing across browsers, emulators, simulators, and the Real Device Cloud.",
+    image: "/case-studies/saucelabs/software-testing-session-portrait.png",
+    alt: "Sauce Labs software testing session with a remote mobile device",
     action: "View project",
-    href: "/work/saucelabs/live-testing",
+    href: "/work/saucelabs/software-testing",
   },
   {
     name: "Team Management",
     description:
       "An enterprise administration and role-based access system for organizing users, teams, and test concurrency across complex organizations.",
-    image: "/case-studies/saucelabs/team-management-placeholder.svg",
-    imageClassName: "saucelabs-project-card-media-placeholder is-team",
-    alt: "Placeholder for forthcoming Sauce Labs Team Management interface screens",
+    image: "/case-studies/saucelabs/team-management/group-concurrency.png",
+    alt: "Sauce Labs group management screen for allocating shared test concurrency",
     action: "View project",
     href: "/work/saucelabs/team-management",
   },
@@ -99,18 +98,10 @@ function ProjectCard({ project }: { project: SauceProject }) {
 
 export default function SauceLabsLandingPage() {
   return (
-    <CaseStudyShell backHref="/work" backLabel="Back to work">
+    <CaseStudyShell backHref="/work" backLabel="Back to work" overlayHeader>
       <SauceLabsSpaceHero />
 
-      <section className="saucelabs-landing-projects" aria-labelledby="saucelabs-projects-title">
-        <header>
-          <h2 id="saucelabs-projects-title">Projects</h2>
-          <p>
-            The case study is organized around the core testing experience, the enterprise controls around it, the
-            commercial systems that supported it, and the design operation behind the product.
-          </p>
-        </header>
-
+      <section className="saucelabs-landing-projects" aria-label="Sauce Labs projects">
         <div className="saucelabs-landing-project-list">
           {projects.map((project) => (
             <ProjectCard key={project.name} project={project} />

@@ -5,7 +5,7 @@ import { type CSSProperties, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import styles from "@/app/lab/animated-headshot/animated-headshot.module.css";
 
-const PORTRAIT_SRC = "/josh-king-portrait.png";
+const PORTRAIT_SRC = "/images/lab/particle-headshot/me.png";
 const MOBILE_BREAKPOINT = 700;
 
 type ParticleShape = "square" | "circle" | "diamond" | "dash";
@@ -43,21 +43,21 @@ const PRESETS: Array<{ name: string; settings: ParticleSettings }> = [
     settings: {
       zoom: 1.3,
       verticalCrop: -0.12,
-      trace: 0.22,
-      contrast: 1.45,
-      featureDetail: 1.3,
-      coherence: 0.72,
+      trace: 0,
+      contrast: 1.65,
+      featureDetail: 1.5,
+      coherence: 0.42,
       spacing: 1,
-      size: 0.65,
+      size: 1,
       shape: "square",
-      speed: 0.7,
-      travel: 1,
-      chaos: 0.08,
-      drift: 0.04,
-      hoverForce: 0.62,
-      hoverRadius: 0.34,
-      returnSpeed: 0.075,
-      glow: 0.75,
+      speed: 0.5,
+      travel: 1.08,
+      chaos: 0.2,
+      drift: 0.1,
+      hoverForce: 0.36,
+      hoverRadius: 0.3,
+      returnSpeed: 0.065,
+      glow: 0.8,
     },
   },
   {
@@ -145,30 +145,27 @@ const vertexShader = /* glsl */ `
 
   void main() {
     float simulationTime = mix(uTime, 7.0, uReducedMotion);
-    float speedVariation = mix(0.072, 0.072 + aSeed * 0.028, uChaos);
-    float phase = mix(aSeed * 0.32, aSeed, uChaos);
+    float speedVariation = mix(0.052, 0.052 + aSeed * 0.034, uChaos);
+    float phase = fract(aSeed * 1.731 + aTarget.x * 0.19 + aTarget.y * 0.13);
     float cycle = fract(simulationTime * speedVariation + phase);
-    float arriving = smoothstep(0.0, 0.3, cycle);
+    float arriving = smoothstep(0.02, 0.34, cycle);
     arriving = 1.0 - pow(1.0 - arriving, 3.0);
 
     vec2 targetPoint = vec2(
       aTarget.x * uPortraitScale,
       aTarget.y * uPortraitScale + uPortraitOffsetY
     );
-    vec2 orderedDirection = normalize(aSpawn.xy);
+    vec2 orderedDirection = normalize(aSpawn.xy + vec2(0.0001));
     float spawnRadius = mix(1.24, length(aSpawn.xy), uChaos) * uTravel;
     vec3 spawnPoint = vec3(orderedDirection * spawnRadius, aSpawn.z);
-    vec2 targetScatter = vec2(cos(aSeed * 73.0), sin(aSeed * 91.0)) * 0.026 * uChaos;
+    vec2 targetScatter = vec2(cos(aSeed * 73.0), sin(aSeed * 91.0)) * 0.009 * uChaos;
     vec3 targetPosition = vec3(targetPoint + targetScatter, aTarget.z);
     vec3 particlePosition = mix(spawnPoint, targetPosition, arriving);
-    float stableParticle = step(aSeed, uCoherence);
-    particlePosition = mix(particlePosition, targetPosition, stableParticle * 0.96);
-    arriving = mix(arriving, 1.0, stableParticle);
 
     vec2 ambientDrift = vec2(
       sin(simulationTime * 1.1 + aSeed * 43.0),
       cos(simulationTime * 0.92 + aSeed * 37.0)
-    ) * 0.014 * uDrift * arriving * (1.0 - stableParticle * 0.86);
+    ) * 0.009 * uDrift * arriving;
     particlePosition.xy += ambientDrift;
 
     if (uReducedMotion > 0.5) {
@@ -187,10 +184,10 @@ const vertexShader = /* glsl */ `
       hover *
       (1.0 - uReducedMotion);
 
-    float fadeIn = smoothstep(0.0, 0.22, cycle);
-    float fadeOut = 1.0 - smoothstep(0.78, 1.0, cycle);
+    float fadeIn = smoothstep(0.04, 0.3, cycle);
+    float fadeOutStart = mix(0.64, 0.88, uCoherence);
+    float fadeOut = 1.0 - smoothstep(fadeOutStart, 1.0, cycle);
     float cycleAlpha = fadeIn * fadeOut;
-    cycleAlpha = mix(cycleAlpha, 1.0, stableParticle);
     if (uReducedMotion > 0.5) {
       cycleAlpha = 1.0;
     }
@@ -199,12 +196,13 @@ const vertexShader = /* glsl */ `
     float gridVisible = step(mod(aGrid.x, spacing), 0.1) * step(mod(aGrid.y, spacing), 0.1);
     float inFrame = step(abs(particlePosition.x), 1.04) * step(abs(particlePosition.y), 1.04);
     float tonalBrightness = clamp((aBrightness - 0.5) * uContrast + 0.5, 0.0, 1.0);
-    float featureBrightness = clamp(max(tonalBrightness, aEdge * uFeatureDetail), 0.0, 1.0);
+    float featureBrightness = clamp(max(tonalBrightness * 0.86, aEdge * uFeatureDetail), 0.0, 1.0);
+    float approachLight = 0.035 + pow(arriving, 1.7) * 0.965;
 
     vAlpha =
       cycleAlpha *
-      (0.075 + arriving * 0.925) *
-      (0.035 + featureBrightness * 1.12) *
+      approachLight *
+      (0.05 + pow(featureBrightness, 0.9) * 1.18) *
       gridVisible *
       inFrame;
     vBrightness = featureBrightness;
@@ -212,7 +210,7 @@ const vertexShader = /* glsl */ `
     vSeed = aSeed;
 
     gl_Position = projectionMatrix * modelViewMatrix * vec4(particlePosition, 1.0);
-    gl_PointSize = (0.9 + aSize * 1.5 + hover * 1.35 * uGlow) * uPointSize * uPixelRatio;
+    gl_PointSize = (0.72 + aSize * 1.2 + hover * 0.72 * uGlow) * uPointSize * uPixelRatio;
   }
 `;
 
@@ -242,14 +240,14 @@ const fragmentShader = /* glsl */ `
     if (uShape > 1.5 && uShape < 2.5) shapeEdge = diamondEdge;
     if (uShape > 2.5) shapeEdge = dashEdge;
 
-    vec3 deepGreen = vec3(0.018, 0.42, 0.135);
-    vec3 portraitGreen = vec3(0.06, 0.68, 0.245);
-    vec3 luminousGreen = vec3(0.5, 1.0, 0.67);
-    float light = clamp(vBrightness * (0.72 + uGlow * 0.16) + vHover * 0.9, 0.0, 1.0);
-    vec3 color = mix(deepGreen, portraitGreen, smoothstep(0.05, 0.72, light));
-    color = mix(color, luminousGreen, smoothstep(0.72, 1.0, light));
-    float microVariation = mix(0.92, 1.08, fract(vSeed * 17.0));
-    gl_FragColor = vec4(color * microVariation, vAlpha * shapeEdge * (0.72 + uGlow * 0.34));
+    vec3 deepGreen = vec3(0.008, 0.4, 0.08);
+    vec3 portraitGreen = vec3(0.025, 0.94, 0.25);
+    vec3 luminousGreen = vec3(0.48, 1.0, 0.62);
+    float light = clamp(vBrightness * (0.7 + uGlow * 0.12) + vHover * 0.72, 0.0, 1.0);
+    vec3 color = mix(deepGreen, portraitGreen, smoothstep(0.08, 0.68, light));
+    color = mix(color, luminousGreen, smoothstep(0.7, 1.0, light));
+    float microVariation = mix(0.86, 1.08, fract(vSeed * 17.0));
+    gl_FragColor = vec4(color * microVariation, vAlpha * shapeEdge * (0.66 + uGlow * 0.28));
   }
 `;
 
@@ -268,8 +266,12 @@ function deterministicNoise(x: number, y: number) {
   return value - Math.floor(value);
 }
 
+function clamp01(value: number) {
+  return Math.max(0, Math.min(1, value));
+}
+
 function buildParticleData(image: HTMLImageElement): ParticleData {
-  const sampleSize = window.innerWidth <= MOBILE_BREAKPOINT ? 208 : 256;
+  const sampleSize = window.innerWidth <= MOBILE_BREAKPOINT ? 216 : 272;
   const offscreen = document.createElement("canvas");
   offscreen.width = sampleSize;
   offscreen.height = sampleSize;
@@ -316,8 +318,31 @@ function buildParticleData(image: HTMLImageElement): ParticleData {
       };
       const horizontalEdge = Math.abs(sampleLuminance(x + 1, y) - sampleLuminance(x - 1, y));
       const verticalEdge = Math.abs(sampleLuminance(x, y + 1) - sampleLuminance(x, y - 1));
-      const edge = Math.min(1, (horizontalEdge + verticalEdge) * 1.8);
+      const edge = Math.min(1, (horizontalEdge + verticalEdge) * 2.25);
       const seed = deterministicNoise(x + 17, y + 43);
+      const alphaAt = (sampleX: number, sampleY: number) => {
+        const clampedX = Math.max(0, Math.min(sampleSize - 1, sampleX));
+        const clampedY = Math.max(0, Math.min(sampleSize - 1, sampleY));
+        return pixels[(clampedY * sampleSize + clampedX) * 4 + 3] / 255;
+      };
+      const silhouetteEdge = 1 - Math.min(
+        alphaAt(x - 3, y),
+        alphaAt(x + 3, y),
+        alphaAt(x, y - 3),
+        alphaAt(x, y + 3),
+      );
+      const clusterNoise = deterministicNoise(Math.floor(x / 7) + 311, Math.floor(y / 7) + 127);
+      const rowNoise = deterministicNoise(Math.floor(y / 3) + 59, Math.floor(x / 19) + 83);
+      const density = clamp01(
+        0.22 +
+          Math.pow(luminance, 0.72) * 0.24 +
+          edge * 0.34 +
+          silhouetteEdge * 0.12 +
+          (clusterNoise - 0.5) * 0.32 +
+          (rowNoise - 0.5) * 0.12,
+      );
+      if (deterministicNoise(x + 701, y + 907) > density) continue;
+
       const angle = deterministicNoise(x + 101, y + 79) * Math.PI * 2;
       const radius = 1.18 + deterministicNoise(x + 211, y + 13) * 0.62;
       const targetX = ((x / (sampleSize - 1)) * 2 - 1) * 0.93;
@@ -327,9 +352,11 @@ function buildParticleData(image: HTMLImageElement): ParticleData {
       spawnValues.push(Math.cos(angle) * radius, Math.sin(angle) * radius, seed * 0.08);
       gridValues.push(x, y);
       seedValues.push(seed);
-      brightnessValues.push(Math.min(1, 0.12 + Math.pow(luminance, 0.74) * 0.94));
+      const directionalLight = 0.48 + (x / (sampleSize - 1)) * 0.78;
+      const mappedLuminance = clamp01(luminance * directionalLight);
+      brightnessValues.push(Math.min(1, 0.04 + Math.pow(mappedLuminance, 0.8) * 0.98));
       edgeValues.push(edge);
-      sizeValues.push(0.42 + deterministicNoise(x + 7, y + 5) * 0.78);
+      sizeValues.push(0.34 + deterministicNoise(x + 7, y + 5) * 0.68);
     }
   }
 

@@ -13,15 +13,17 @@ type CaseStudyShellProps = {
   backHref?: string;
   backLabel?: string;
   children: ReactNode;
+  overlayHeader?: boolean;
 };
 
 export function CaseStudyShell({
   backHref = "/work",
   backLabel = "Back to case studies",
   children,
+  overlayHeader = false,
 }: CaseStudyShellProps) {
   return (
-    <main className="case-study-page">
+    <main className={`case-study-page${overlayHeader ? " case-study-page-overlay-header" : ""}`}>
       <a className="skip-link" href="#case-study-content">
         Skip to content
       </a>

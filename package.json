@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:network-fund": "node scripts/build-network-fund-exhibit.mjs",
     "start": "next start",
     "lint": "eslint ."
   },

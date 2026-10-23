@@ -78,7 +78,7 @@ The previous portfolio source is available from `git@github.com:joshking/portfol
 
 - professional summary and resume content spanning StormForge, Sauce Labs, SoFi, Dell, Indaba, Kinetic Advertising Group, Dealerspan, and Lee Enterprises;
 - StormForge case-study material for Optimize Live, a redesign/design system, Optimize Pro, and onboarding;
-- Sauce Labs material covering its design team guide, live testing, team management, and billing;
+- Sauce Labs material covering its design team guide, software testing, team management, and billing;
 - Dell, League Leader, 41 Realty Group, The Viv Bioactive, and Pixwel entries;
 - project logos, interface imagery, research artifacts, and an onboarding guide PDF;
 - existing contact and LinkedIn routes.

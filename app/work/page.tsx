@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "@/components/motion-link";
 import { MobileMenu } from "@/components/mobile-menu";
+import { WorkCinematicHero } from "@/components/work-cinematic-hero";
 
 export const metadata: Metadata = {
   title: "Work — Josh King",
@@ -151,12 +152,9 @@ export default function WorkPage() {
         <MobileMenu />
       </header>
 
-      <section id="work-content" className="logo-work work-layout-grid">
-        <header className="page-intro">
-          <h1>A field of work.</h1>
-          <p>Product systems and digital experiences, organized by proximity rather than presentation theater.</p>
-        </header>
+      <WorkCinematicHero />
 
+      <section className="logo-work work-layout-grid">
         <section className="reserve-section" aria-labelledby="reserve-title">
           <Link className="reserve-link" href="/work/reserve">
             <div className="reserve-art" aria-hidden="true">
